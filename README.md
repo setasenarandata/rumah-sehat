@@ -40,3 +40,15 @@
 | 2006482792 | Setasena Randata Ramadanie | 1 17 |
 | 2006482520 | Febrian Rayhan Aryadianto | 11 12 |
 ---
+
+**Kontrak Tahap 2 Tugas Akhir**
+
+| NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
+| ----------| --- | ---------- | 
+| 1906303052 | Mirza Raevan Faisal | 4 |
+| 2006597531 | Nathasya Shalsabilla Putri | 9 |
+| 1906399215 | Muhammad Farhan Thariq | 16 |
+| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 8 |
+| 2006482792 | Setasena Randata Ramadanie | 10 |
+| 2006482520 | Febrian Rayhan Aryadianto | 13 |
+---
