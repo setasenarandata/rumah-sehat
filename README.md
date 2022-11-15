@@ -52,5 +52,3 @@
 | 2006482792 | Setasena Randata Ramadanie | 10 |
 | 2006482520 | Febrian Rayhan Aryadianto | 13 |
 ---
-
-
