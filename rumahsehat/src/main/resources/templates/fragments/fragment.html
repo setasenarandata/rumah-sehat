@@ -58,7 +58,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="/chart-obat">Chart Obat</a>
-                      <a class="dropdown-item" href="/manage-user">Management User</a>
+                      <a class="dropdown-item" th:href="@{/user/viewall}">Management User</a>
                       <a class="dropdown-item" href="/daftar-resep">Daftar Resep</a>
                       <a class="dropdown-item" href="/daftar-obat">Daftar Obat</a>
                       <a class="dropdown-item" href="/appointment">Something else here</a>
@@ -76,11 +76,9 @@
                 </div>
 
             </div>
-            <div class="w-24">
-                <a href="/login">
-                  <img src="/rumahsehat/src/main/resources/static/images/login.svg" th:src="@{images/login.svg}" alt="login">
-                </a>
-            </div>
+            <ul class="navbar-nav pull-right">
+                <a class="nav-item nav-link text text-secondary" th:href="@{/logout-sso}">Logout</a>
+            </ul>
         </div>        
     </nav>
 </body>
