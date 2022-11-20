@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Beranda</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-sky-100">
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="flex mt-24">
+        <div class="flex flex-col justify-center flex-1 ml-24">
+            <div>
+                <img class="w-40" src="/rumahsehat/src/main/resources/static/images/health.png" th:src="@{images/health.png}" alt="health.png">
+            </div>
+            <p class="text-7xl text-black">
+                <span class="text-blue-400 font-bold">One-Stop Solution</span> <br> for your healthy life.
+            </p>
+            <br>
+            <p class="text-2xl text-gray-400">
+                Explore all of our features to improve your healthy life like never before!
+            </p>
+        </div>
+        <div class="flex-1">
+            <img class="w-1/2 mx-auto" src="/rumahsehat/src/main/resources/static/images/hero-image.png" th:src="@{images/hero-image.png}" alt="hero-image.png">
+        </div>
+    </div>     
+</body>
+</html>
