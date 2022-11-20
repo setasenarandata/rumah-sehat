@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singidol</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </head>
+    <head th:fragment="js">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+        crossorigin="anonymous">
+        </script>
+        <script src="https://getbootsrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+</head>
+
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light">
+        <div class="flex justify-between w-screen h-12 items-center">
+            <div class="w-32">
+                <a href="/">
+                    <img src="/rumahsehat/src/main/resources/static/images/logo-rumahsehat.svg" th:src="@{images/logo-rumahsehat.svg}" alt="rumahsehat">
+                </a>
+            </div>
+            <div class="flex w-full justify-around">
+                <!-- Dropdown Dokter -->
+                <div class="dropdown mr-2">
+                    <button class="btn btn-primary dropdown-toggle text-black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dokter
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/appointment">My Appointment</a>
+                      <a class="dropdown-item" href="/resep">Buat Resep</a>
+                    </div>
+                </div>
+                <!-- Dropdown Pasien -->
+                <div class="dropdown mr-2">
+                    <button class="btn btn-danger dropdown-toggle text-black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Pasien
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/register">Registrasi</a>
+                      <a class="dropdown-item" href="/my-profile">My Profile</a>
+                      <a class="dropdown-item" href="/add-appointment">Schedule Appointment</a>
+                      <a class="dropdown-item" href="/appointment">My Appointment</a>
+                      <a class="dropdown-item" href="/tagihan">Tagihan</a>
+                      <a class="dropdown-item" href="/topup">Topup</a>
+                    </div>
+                </div>
+                <!-- Dropdown Admin -->
+                <div class="dropdown mr-2">
+                    <button class="btn btn-warning dropdown-toggle text-black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Admin
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/chart-obat">Chart Obat</a>
+                      <a class="dropdown-item" th:href="@{/user/viewall}">Management User</a>
+                      <a class="dropdown-item" href="/daftar-resep">Daftar Resep</a>
+                      <a class="dropdown-item" href="/daftar-obat">Daftar Obat</a>
+                      <a class="dropdown-item" href="/appointment">Something else here</a>
+                    </div>
+                </div>
+                <!-- Dropdown Apoteker -->
+                <div class="dropdown">
+                    <button class="btn btn-info dropdown-toggle text-black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Apoteker
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/daftar-resep">Daftar Resep</a>
+                      <a class="dropdown-item" href="/daftar-obat">Daftar Obat</a>
+                    </div>
+                </div>
+
+            </div>
+            <ul class="navbar-nav pull-right">
+                <a class="nav-item nav-link text text-secondary" th:href="@{/logout-sso}">Logout</a>
+            </ul>
+        </div>        
+    </nav>
+</body>
+</html>

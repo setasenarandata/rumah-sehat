@@ -36,8 +36,13 @@ public class PageController {
     @Autowired
     ServerProperties serverProperties;
 
+    @RequestMapping("/")
+    public String home(Principal principal, Model model) {
+        return "home";
+    }
+
     @RequestMapping("/login")
-    public String login(Model model){
+    public String login(Model model) {
         model.addAttribute("port", serverProperties.getPort());
         return "login";
     }
@@ -48,7 +53,7 @@ public class PageController {
     public ModelAndView adminLoginSSO(
             @RequestParam(value = "ticket", required = false) String ticket,
             HttpServletRequest request
-    ){
+    ) {
         ServiceResponse serviceResponse = this.webClient.get().uri(
                 String.format(
                         Setting.SERVER_VALIDATE_TICKET,
@@ -62,7 +67,7 @@ public class PageController {
 
         UserModel user = userService.getUserByUsername(username);
 
-        if(user == null){
+        if (user == null) {
             user = new UserModel();
             user.setEmail(username + "@ui.ac.id");
             user.setNama(attributes.getNama());
@@ -84,15 +89,15 @@ public class PageController {
         return new ModelAndView("redirect:/");
     }
 
-    @GetMapping(value="/login-sso")
-    public ModelAndView loginSSO(){
-        return new ModelAndView("redirect:"+ Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
+    @GetMapping(value = "/login-sso")
+    public ModelAndView loginSSO() {
+        return new ModelAndView("redirect:" + Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
     }
 
     @GetMapping(value = "/logout-sso")
-    public ModelAndView logoutSSO(Principal principal){
+    public ModelAndView logoutSSO(Principal principal) {
         UserModel user = userService.getUserByUsername(principal.getName());
-        if (user.getIsSso() == false){
+        if (user.getIsSso() == false) {
             return new ModelAndView("redirect:/logout");
         }
         return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
