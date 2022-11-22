@@ -2,7 +2,6 @@ package com.rumahsehat.rumahsehat.security;
 
 import com.rumahsehat.rumahsehat.model.UserModel;
 import com.rumahsehat.rumahsehat.repository.UserDb;
-import com.rumahsehat.rumahsehat.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
