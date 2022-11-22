@@ -22,6 +22,8 @@ public class WebSecurityConfig {
         .antMatchers("/js/**").permitAll()
         .antMatchers("/login-sso", "/validate-ticket").permitAll()
         .antMatchers("/user/viewall").hasAuthority("admin")
+        .antMatchers("/obat/viewall").hasAuthority("admin")
+        .antMatchers("/obat/viewall").hasAuthority("apoteker")
         .anyRequest().authenticated()
         .and()
         .formLogin()
