@@ -1,5 +1,7 @@
 package com.rumahsehat.rumahsehat.security;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,8 @@ public class WebSecurityConfig {
         http.authorizeRequests()
         .antMatchers("/css/**").permitAll()
         .antMatchers("/js/**").permitAll()
+        .antMatchers("/images/**").permitAll()
+        .antMatchers("/").permitAll()
         .antMatchers("/login-sso", "/validate-ticket").permitAll()
         .antMatchers("/user/viewall").hasAuthority("admin")
         .antMatchers("/obat/viewall").hasAuthority("admin")

@@ -76,9 +76,18 @@
                 </div>
 
             </div>
-            <ul class="navbar-nav pull-right">
-                <a class="nav-item nav-link text text-secondary" th:href="@{/logout-sso}">Logout</a>
-            </ul>
+            <div class="w-24">
+              <div th:if="${#httpServletRequest.getUserPrincipal() == null}">
+                <a th:href="@{/login}">
+                  <img src="/rumahsehat/src/main/resources/static/images/login.svg" th:src="@{images/login.svg}" alt="login">
+                </a>
+              </div>
+              <div th:if="${#httpServletRequest.getUserPrincipal() != null}">
+                <a th:href="@{/logout-sso}">
+                  <img src="/rumahsehat/src/main/resources/static/images/logout.svg" th:src="@{images/logout.svg}" alt="logout">
+                </a>
+              </div>
+            </div>
         </div>        
     </nav>
 </body>
