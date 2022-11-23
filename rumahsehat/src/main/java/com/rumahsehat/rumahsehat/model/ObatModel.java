@@ -32,7 +32,6 @@ public class ObatModel implements Serializable {
     private Integer stok;
 
     @NotNull
-    @Size(max = 50)
     @Column(name = "harga", nullable = false)
     private Integer harga;
 }
