@@ -1,7 +1,9 @@
 package com.rumahsehat.rumahsehat.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
@@ -14,8 +16,9 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-@Entity
-@Table(name = "user")
+@AllArgsConstructor
+@NoArgsConstructor
+@MappedSuperclass
 public class UserModel implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -46,9 +49,9 @@ public class UserModel implements Serializable {
     @Column (name = "password", nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction. CASCADE)
-    @JsonIgnore
-    private RoleModel role;
+    @NotNull
+    @Column(name="role", nullable = false)
+    private String role;
+
+
 }

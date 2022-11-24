@@ -1,11 +1,15 @@
 package com.rumahsehat.rumahsehat.controller;
 
 import com.rumahsehat.rumahsehat.Setting.Setting;
+import com.rumahsehat.rumahsehat.model.AdminModel;
 import com.rumahsehat.rumahsehat.model.UserModel;
+import com.rumahsehat.rumahsehat.repository.AdminDb;
+import com.rumahsehat.rumahsehat.repository.ApotekerDb;
+import com.rumahsehat.rumahsehat.repository.DokterDb;
+import com.rumahsehat.rumahsehat.repository.PasienDb;
 import com.rumahsehat.rumahsehat.security.xml.Attributes;
 import com.rumahsehat.rumahsehat.security.xml.ServiceResponse;
-import com.rumahsehat.rumahsehat.service.RoleService;
-import com.rumahsehat.rumahsehat.service.UserService;
+import com.rumahsehat.rumahsehat.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,22 +32,31 @@ import java.security.Principal;
 @Controller
 public class PageController {
     @Autowired
-    private UserService userService;
+    AdminDb adminDb;
+
 
     @Autowired
-    private RoleService roleService;
+    ApotekerDb apotekerDb;
+
+    @Autowired
+    DokterDb dokterDb;
+
+    @Autowired
+    AdminService adminService;
+
+    @Autowired
+    PasienDb pasienDb;
 
     @Autowired
     ServerProperties serverProperties;
 
-    @RequestMapping("/")
-    public String home(Principal principal, Model model) {
+    @GetMapping("/")
+    public String home(Model model) {
         return "home";
     }
 
     @RequestMapping("/login")
     public String login(Model model) {
-        model.addAttribute("port", serverProperties.getPort());
         return "login";
     }
 
@@ -65,18 +78,19 @@ public class PageController {
         Attributes attributes = serviceResponse.getAuthenticationSuccess().getAttributes();
         String username = serviceResponse.getAuthenticationSuccess().getUser();
 
-        UserModel user = userService.getUserByUsername(username);
+        AdminModel user = adminDb.findByUsername(username);
 
         if (user == null) {
-            user = new UserModel();
+            user = new AdminModel();
             user.setEmail(username + "@ui.ac.id");
             user.setNama(attributes.getNama());
             user.setPassword("belajarbelajar");
             user.setUsername(username);
             user.setIsSso(true);
-            user.setRole(roleService.getById(Long.valueOf(1)));
-            userService.addUser(user);
+            user.setRole("admin");
+            adminService.addAdmin(user);
         }
+        System.out.println(user.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, "belajarbelajar");
 
@@ -96,8 +110,17 @@ public class PageController {
 
     @GetMapping(value = "/logout-sso")
     public ModelAndView logoutSSO(Principal principal) {
-        UserModel user = userService.getUserByUsername(principal.getName());
-        if (user.getIsSso() == false) {
+        UserModel user = apotekerDb.findByUsername(principal.getName());
+        if(user == null) {
+            user = adminDb.findByUsername(principal.getName());
+        }
+        if(user == null) {
+            user = dokterDb.findByUsername(principal.getName());
+        }
+        if(user == null) {
+            user = pasienDb.findByUsername(principal.getName());
+        }
+        if (user.getIsSso() == false){
             return new ModelAndView("redirect:/logout");
         }
         return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
