@@ -30,6 +30,7 @@ public class ApotekerController {
         apoteker.setRole("Apoteker");
         apoteker.setIsSso(false);
         apoteker.setPassword(apotekerService.encrypt(apoteker.getPassword()));
+
         apotekerService.addApoteker(apoteker);
         model.addAttribute("apoteker", apoteker);
 
