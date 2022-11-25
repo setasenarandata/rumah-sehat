@@ -27,15 +27,16 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login-sso", "/validate-ticket").permitAll()
+                .antMatchers("/api/v1/pasien/add").permitAll()
 //                .antMatchers("/user/viewall").hasAuthority("admin")
-                .antMatchers("/obat/viewall").hasAuthority("admin")
-                .antMatchers("/obat/viewall").hasAuthority("Apoteker")
+                .antMatchers("/obat/viewall").hasAnyAuthority("admin", "Apoteker")
                 .antMatchers("/obat/ubah/**").hasAuthority("Apoteker")
                 .anyRequest().authenticated()
                 .and()
@@ -44,7 +45,6 @@ public class WebSecurityConfig {
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").permitAll();
-
         return http.build();
     }
 
