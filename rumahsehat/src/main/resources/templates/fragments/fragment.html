@@ -33,7 +33,7 @@
                       Dokter
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="/appointment">My Appointment</a>
+                      <a class="dropdown-item" th:href="@{/appointment/viewall}">My Appointment</a>
                       <a class="dropdown-item" href="/resep">Buat Resep</a>
                     </div>
                 </div>
@@ -45,8 +45,6 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="/register">Registrasi</a>
                       <a class="dropdown-item" href="/my-profile">My Profile</a>
-                      <a class="dropdown-item" href="/add-appointment">Schedule Appointment</a>
-                      <a class="dropdown-item" href="/appointment">My Appointment</a>
                       <a class="dropdown-item" href="/tagihan">Tagihan</a>
                       <a class="dropdown-item" href="/topup">Topup</a>
                     </div>
@@ -59,6 +57,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="/chart-obat">Chart Obat</a>
                       <a class="dropdown-item" th:href="@{/user/viewall}">Management User</a>
+                      <a class="dropdown-item" th:href="@{/appointment/viewall}">All Appointments</a>
                       <a class="dropdown-item" href="/daftar-resep">Daftar Resep</a>
                       <a class="dropdown-item" href="/daftar-obat">Daftar Obat</a>
                       <a class="dropdown-item" href="/appointment">Something else here</a>

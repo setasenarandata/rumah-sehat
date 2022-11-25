@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Rumah Sehat</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body class="bg-sky-100">
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>List Appointment</h2>
+                <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th th:if="*{role=='Admin'}"style="text-align: center">Nama Dokter</th>
+                        <th style="text-align: center">Nama Pasien</th>
+                        <th style="text-align: center">Waktu Awal Appointment</th>
+                        <th style="text-align: center">Status Appointment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="appointment, iterationStatus : ${listAppointment}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:if="*{role=='Admin'}" th:text="${appointment.dokter.nama}"></td>
+                        <td th:text="${appointment.pasien.nama}"></td>
+                        <td th:text="${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}"></td>
+                        <td th:text="${appointment.isDone}"></td>
+                        <td style="align-items: center">
+                            <div class="flex-wrap">
+                                <a class="btn btn-primary" href="/" >Detail</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <a class="btn btn-primary" href="/">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
