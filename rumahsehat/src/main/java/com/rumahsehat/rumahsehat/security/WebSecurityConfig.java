@@ -38,6 +38,8 @@ public class WebSecurityConfig {
 //                .antMatchers("/user/viewall").hasAuthority("admin")
                 .antMatchers("/obat/viewall").hasAnyAuthority("admin", "Apoteker")
                 .antMatchers("/obat/ubah/**").hasAuthority("Apoteker")
+                .antMatchers("/appointment").hasAnyAuthority("admin", "dokter")
+                .antMatchers("/appointment/*").hasAnyAuthority("admin", "dokter")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

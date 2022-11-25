@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,9 +28,7 @@ import java.util.List;
 public class AppointmentModel implements Serializable{
 
     @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="kode",nullable = false)
+    @Size(max=30)
     private String kode;
 
     @NotNull
