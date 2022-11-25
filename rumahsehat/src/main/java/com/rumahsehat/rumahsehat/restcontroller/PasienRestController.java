@@ -1,7 +1,8 @@
 package com.rumahsehat.rumahsehat.restcontroller;
 
+import com.rumahsehat.rumahsehat.model.PasienModel;
 import com.rumahsehat.rumahsehat.model.UserModel;
-import com.rumahsehat.rumahsehat.service.UserRestService;
+import com.rumahsehat.rumahsehat.service.PasienRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -15,19 +16,19 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UserRestController {
+public class PasienRestController {
 
     @Autowired
-    private UserRestService userRestService;
+    private PasienRestService pasienRestService;
 
-    @PostMapping(value = "/user/add", consumes = "application/json")
-    private UserModel createUser(@Valid @RequestBody UserModel user, BindingResult bindingResult){
+    @PostMapping(value = "/pasien/add", consumes = "application/json")
+    private PasienModel addPasien(@Valid @RequestBody PasienModel pasien, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field. "
             );
         } else {
-            return userRestService.createUser(user);
+            return pasienRestService.addPasien(pasien);
         }
     }
 }

@@ -42,12 +42,12 @@ public class AppointmentModel implements Serializable{
     private LocalDateTime waktuAwal;
 
      @ManyToOne(fetch = FetchType.EAGER, optional = false)
-     @JoinColumn(name = "uuid_dokter", referencedColumnName = "uuid", nullable = false)
+     @JoinColumn(name = "uuid_dokter", referencedColumnName = "id", nullable = false)
      @OnDelete(action = OnDeleteAction.CASCADE)
      private DokterModel dokter;
 
      @ManyToOne(fetch = FetchType.EAGER, optional = false)
-     @JoinColumn(name = "uuid_pasien", referencedColumnName = "uuid", nullable = false)
+     @JoinColumn(name = "uuid_pasien", referencedColumnName = "id", nullable = false)
      @OnDelete(action = OnDeleteAction.CASCADE)
      private PasienModel pasien;
 

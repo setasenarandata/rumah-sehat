@@ -1,8 +1,7 @@
 import 'dart:convert';
+// import 'dart:ffi';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
@@ -18,6 +17,7 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
   TextEditingController nama_controller = TextEditingController();
   TextEditingController email_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
+  TextEditingController umur_controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,27 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
             Container(
               margin: EdgeInsets.all(10),
               child: TextField(
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                ],
+                // field umur
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  labelText: "Umur",
+                ),
+                controller: umur_controller,
+                onChanged: (value) {
+                  setState(() {});
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextField(
                 // field password
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -125,15 +145,19 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
                       MaterialStatePropertyAll<Color>(Colors.indigo),
                 ),
                 child: Text(
-                  "Tambahkan",
+                  "Daftar",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
                 onPressed: () async {
                   // post
-                  create_pasien(username_controller.text, nama_controller.text,
-                      email_controller.text, password_controller.text);
+                  create_pasien(
+                      username_controller.text,
+                      nama_controller.text,
+                      email_controller.text,
+                      password_controller.text,
+                      int.parse(umur_controller.text));
                   // Navigator push
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
@@ -149,23 +173,23 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
   }
 }
 
-Future<void> create_pasien(
-    String username, String nama, String email, String password) async {
+Future<void> create_pasien(String username, String nama, String email,
+    String password, int umur) async {
   http
       .post(
-        Uri.parse('http://localhost:8000/api/v1/user/add'),
-        // headers: <String, String>{
-        //   'Content-Type': 'application/json; charset=UTF-8',
-        // },
+        Uri.parse('http://10.0.2.2:8000/api/v1/pasien/add'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
         body: jsonEncode(<String, dynamic>{
           "username": username,
           "isSso": false,
           "nama": nama,
           "email": email,
           "password": password,
-          "role": {
-            "id": 4,
-          }
+          "role": "Pasien",
+          "saldo": 0,
+          "umur": umur
         }),
       )
       .then((response) => print(response.body))

@@ -21,11 +21,10 @@ import java.io.Serializable;
 @Table(name = "pasien")
 public class PasienModel extends UserModel implements Serializable {
     @NotNull
-    @Column(name="saldo", nullable = false)
+    @Column(name="saldo", nullable = true, columnDefinition = "integer default 0")
     private Integer saldo;
 
     @NotNull
-    @Size(max = 3)
     @Column(name="umur", nullable = false)
     private Integer Umur;
 }
