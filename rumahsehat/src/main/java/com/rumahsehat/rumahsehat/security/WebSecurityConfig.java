@@ -19,12 +19,14 @@ public class WebSecurityConfig {
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+        .authorizeRequests()
         .antMatchers("/css/**").permitAll()
         .antMatchers("/js/**").permitAll()
         .antMatchers("/images/**").permitAll()
         .antMatchers("/").permitAll()
         .antMatchers("/login-sso", "/validate-ticket").permitAll()
+        .antMatchers("/api/v1/user/add").permitAll()
         .antMatchers("/user/viewall").hasAuthority("admin")
         .antMatchers("/obat/viewall").hasAuthority("admin")
         .antMatchers("/obat/viewall").hasAuthority("apoteker")

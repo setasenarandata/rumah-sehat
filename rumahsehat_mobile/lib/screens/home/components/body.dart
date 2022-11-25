@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rumahsehat_mobile/constants.dart';
+import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 import 'FeaturesCard.dart';
 import 'LandingHeader.dart';
@@ -41,7 +42,11 @@ class Body extends StatelessWidget {
           FeaturesCard(
             size: size,
             title: "My Profile",
-            press: () {},
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ProfilePage();
+              }));
+            },
             imagePath: 'assets/images/MyProfile.png',
             boxColor: Colors.blue.shade300,
           )

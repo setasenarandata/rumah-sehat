@@ -1,6 +1,7 @@
 package com.rumahsehat.rumahsehat.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Getter
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties(value={"role"},allowSetters = true)
 public class UserModel implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -49,6 +51,5 @@ public class UserModel implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction. CASCADE)
-    @JsonIgnore
     private RoleModel role;
 }
