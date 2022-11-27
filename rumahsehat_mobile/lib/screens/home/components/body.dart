@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rumahsehat_mobile/constants.dart';
+import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 import 'FeaturesCard.dart';
@@ -41,6 +42,20 @@ class Body extends StatelessWidget {
           ),
           FeaturesCard(
             size: size,
+            title: "Login",
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Loginpage();
+              }));
+            },
+            imagePath: 'assets/images/login-banner.png',
+            boxColor: Colors.blue.shade300,
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          FeaturesCard(
+            size: size,
             title: "My Profile",
             press: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -48,8 +63,11 @@ class Body extends StatelessWidget {
               }));
             },
             imagePath: 'assets/images/MyProfile.png',
-            boxColor: Colors.blue.shade300,
-          )
+            boxColor: Colors.yellow.shade300,
+          ),
+          const SizedBox(
+            height: 32,
+          ),
         ],
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_svg/svg.dart';
-import 'package:rumahsehat_mobile/screens/profile/registrasi_pasien_page.dart';
+import 'package:rumahsehat_mobile/constants.dart';
+import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
+import 'package:rumahsehat_mobile/screens/profile/components/MyProfileCard.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -11,21 +11,30 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-          title: Text("My Profile"),
-          elevation: 0,
-          leading: IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset('assets/icons/menu_duo_alt.svg'))),
-      body: Center(
-          child: ElevatedButton(
-        child: Text("Registrasi Pasien"),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return RegistrasiPasienPage();
-          }));
-        },
-      )),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              MyProfileCard(),
+              Container(
+                height: 400,
+                color: Colors.black,
+                child: Stack(
+                  children: <Widget>[],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
