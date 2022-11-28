@@ -33,15 +33,24 @@ class MyProfileCard extends StatelessWidget {
                 Image.asset('assets/images/avatar.png'),
                 SizedBox(height: 20),
                 Text(
-                  "Mr. Sena",
+                  "Setasena R",
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
+                SizedBox(height: 10),
                 Text(
-                  "Member since Nov 27, 2022",
+                  "MyCoolUsername",
                   style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        color: Colors.grey.shade600,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "setasena93@gmail.com",
+                  style: Theme.of(context).textTheme.caption?.copyWith(
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.normal,
                       ),

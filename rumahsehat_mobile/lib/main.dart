@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/constants.dart';
-import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 
 void main() {

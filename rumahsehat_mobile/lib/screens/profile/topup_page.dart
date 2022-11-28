@@ -4,16 +4,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:rumahsehat_mobile/constants.dart';
 import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/components/MyProfileCard.dart';
+import 'package:rumahsehat_mobile/screens/profile/components/ProfileTopup.dart';
 
 import 'components/RSCard.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class TopupPage extends StatelessWidget {
+  const TopupPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    const String saldo = "1.000.000";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -27,25 +27,7 @@ class ProfilePage extends StatelessWidget {
         child: Container(
           child: Column(
             children: <Widget>[
-              MyProfileCard(),
-              RSCard(
-                size: size,
-                saldo: "1000000",
-                colorAccent: Colors.yellow.shade700,
-              ),
-              const SizedBox(height: 80),
-              RSCard(
-                size: size,
-                saldo: "0",
-                colorAccent: Colors.green.shade700,
-              ),
-              // Container(
-              //   height: 400,
-              //   color: Colors.black,
-              //   child: Stack(
-              //     children: <Widget>[],
-              //   ),
-              // )
+              ProfileTopup(),
             ],
           ),
         ),

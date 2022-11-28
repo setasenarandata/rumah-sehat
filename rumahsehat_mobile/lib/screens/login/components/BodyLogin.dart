@@ -73,7 +73,7 @@ class BodyLogin extends StatelessWidget {
                             child: TextField(
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Email or Phone number",
+                                  hintText: "Email or Username",
                                   hintStyle:
                                       TextStyle(color: Colors.grey[400])),
                             ),
@@ -81,6 +81,9 @@ class BodyLogin extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
+                              obscureText: true,
+                              enableSuggestions: false,
+                              autocorrect: false,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
