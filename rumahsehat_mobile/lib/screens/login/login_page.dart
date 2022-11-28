@@ -9,9 +9,6 @@ class Loginpage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(
-          onPressed: () => Navigator.pop(context),
-        ),
       ),
       body: BodyLogin(),
     );

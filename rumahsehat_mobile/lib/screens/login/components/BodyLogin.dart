@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
 
 class BodyLogin extends StatelessWidget {
@@ -96,6 +97,10 @@ class BodyLogin extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         // MIRZA DO LOGIN
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
                         debugPrint("Login");
                       },
                       child: Container(
@@ -122,9 +127,10 @@ class BodyLogin extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegistrasiPasienPage()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrasiPasienPage()),
+                        );
                       },
                       child: Container(
                         height: 50,
