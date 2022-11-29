@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:rumahsehat_mobile/constants.dart';
-import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 import 'FeaturesCard.dart';

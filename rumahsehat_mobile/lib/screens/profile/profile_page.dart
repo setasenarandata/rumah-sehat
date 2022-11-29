@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_svg/svg.dart';
-import 'package:rumahsehat_mobile/constants.dart';
-import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/components/MyProfileCard.dart';
 
 import 'components/RSCard.dart';
