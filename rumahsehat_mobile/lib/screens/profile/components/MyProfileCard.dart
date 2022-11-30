@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/constants.dart';
 
 class MyProfileCard extends StatelessWidget {
-  const MyProfileCard({
-    Key? key,
-  }) : super(key: key);
+  final String username;
+  final String nama;
+  final String email;
+  final int saldo;
+  final int umur;
+
+  const MyProfileCard(
+    this.username,
+    this.nama,
+    this.email,
+    this.saldo,
+    this.umur,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +42,19 @@ class MyProfileCard extends StatelessWidget {
               children: <Widget>[
                 Image.asset('assets/images/avatar.png'),
                 SizedBox(height: 20),
-                Text(
-                  "Setasena R",
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    nama,
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "MyCoolUsername",
+                  username,
                   style: Theme.of(context).textTheme.bodyText2?.copyWith(
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.normal,
@@ -49,7 +62,7 @@ class MyProfileCard extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "setasena93@gmail.com",
+                  email,
                   style: Theme.of(context).textTheme.caption?.copyWith(
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.normal,

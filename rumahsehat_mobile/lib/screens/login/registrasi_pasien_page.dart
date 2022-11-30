@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 class RegistrasiPasienPage extends StatefulWidget {
@@ -168,11 +169,14 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
                                     bottom: BorderSide(
                                         color: Colors.grey.shade100))),
                             child: TextField(
+                              obscureText: true,
+                              enableSuggestions: false,
+                              autocorrect: false,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey[400]),
-                              ),
+                                  border: InputBorder.none,
+                                  hintText: "Password",
+                                  hintStyle:
+                                      TextStyle(color: Colors.grey[400])),
                               controller: password_controller,
                               onChanged: (value) {
                                 setState(() {});
@@ -199,7 +203,7 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return ProfilePage();
+                              return HomePage();
                             },
                           ),
                         );
@@ -237,7 +241,7 @@ Future<void> create_pasien(String username, String nama, String email,
     String password, int umur) async {
   http
       .post(
-        Uri.parse('http://10.0.2.2:8000/api/v1/pasien/add'),
+        Uri.parse('http://localhost:8080/api/v1/pasien/add'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

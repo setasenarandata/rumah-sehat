@@ -10,7 +10,7 @@ class RSCard extends StatelessWidget {
   }) : super(key: key);
 
   final Size size;
-  final String saldo;
+  final int saldo;
   final Color colorAccent;
 
   @override
