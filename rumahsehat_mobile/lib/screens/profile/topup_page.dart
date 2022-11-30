@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 import 'package:rumahsehat_mobile/constants.dart';
 import 'package:rumahsehat_mobile/screens/profile/components/ProfileTopup.dart';
+import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 class TopupPage extends StatefulWidget {
   const TopupPage({Key? key}) : super(key: key);
@@ -106,7 +108,18 @@ class _TopupPageState extends State<TopupPage> {
                     SizedBox(
                       width: double.infinity,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          bool isSuccess = await patchSaldo(
+                              "402892eb84c828d90184c84754550002", amount);
+
+                          if (isSuccess) {
+                            print("top up saldo sukses!!");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ProfilePage();
+                            }));
+                          }
+                        },
                         child: Text(
                           "Confirm Payment",
                           style: TextStyle(
@@ -175,5 +188,21 @@ class _TopupPageState extends State<TopupPage> {
         ),
       ),
     );
+  }
+}
+
+Future<bool> patchSaldo(String id, int amount) async {
+  final response = await http.patch(Uri.parse(
+      'http://localhost:8080/api/v1/pasien/' +
+          id +
+          '/topup/' +
+          amount.toString()));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Future<bool>.value(true);
+  } else {
+    return Future<bool>.value(false);
   }
 }

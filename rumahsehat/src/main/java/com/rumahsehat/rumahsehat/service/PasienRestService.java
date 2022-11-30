@@ -13,4 +13,6 @@ public interface PasienRestService {
     Optional<PasienModel> getPasienById(String id);
 
     String encrypt(String password);
+
+    boolean topupSaldo(PasienModel pasien, int amount);
 }

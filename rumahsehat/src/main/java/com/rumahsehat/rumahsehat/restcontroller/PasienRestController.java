@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,14 @@ public class PasienRestController {
         } else {
             return pasienRestService.addPasien(pasien);
         }
+    }
+
+    @PatchMapping(value = "/pasien/{id}/topup/{amount}")
+    private boolean topupSaldo(@PathVariable("id") String id, @PathVariable("amount") int amount){
+        PasienModel pasien = pasienRestService.getPasienById(id).get();
+        boolean isSuccess = pasienRestService.topupSaldo(pasien, amount);
+
+        return isSuccess ? true : false;
     }
 
     @GetMapping(value = "/pasien/{id}")

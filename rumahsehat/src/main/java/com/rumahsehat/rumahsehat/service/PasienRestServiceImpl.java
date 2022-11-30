@@ -18,6 +18,16 @@ public class PasienRestServiceImpl implements PasienRestService{
     private PasienDb pasienDb;
 
     @Override
+    public boolean topupSaldo(PasienModel pasien, int amount) {
+        int saldo = pasien.getSaldo();
+        int newSaldo = saldo + amount;
+        pasien.setSaldo(newSaldo);
+        pasienDb.save(pasien);
+        int updatedSaldo = pasien.getSaldo();
+        return updatedSaldo == newSaldo ? true : false;
+        
+    }
+    @Override
     public Optional<PasienModel> getPasienById(String id) {
         Optional<PasienModel> pasien = pasienDb.findById(id);
 
