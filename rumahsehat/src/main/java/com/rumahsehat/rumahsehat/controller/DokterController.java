@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class DokterController {
     @Qualifier("dokterServiceImpl")
@@ -32,6 +34,13 @@ public class DokterController {
         dokterService.addDokter(dokter);
         model.addAttribute("dokter", dokter);
 
-        return "redirect:/";
+        return "manajemen-user";
+    }
+
+    @GetMapping(value = "/user/viewall-dokter")
+    private String listSemuaDokter(@ModelAttribute DokterModel dokter,Model model){
+        List<DokterModel> listDokter = dokterService.findAllDokter();
+        model.addAttribute("listDokter", listDokter);
+        return "viewall-dokter";
     }
 }
