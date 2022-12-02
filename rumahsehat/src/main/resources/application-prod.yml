@@ -12,7 +12,7 @@ spring:
 
     # sesuaikan dengan NAMA dan PASSWORD anda dengan username password di bawah ini
     username: root
-    password:
+    password: 
 
   jpa:
     properties:
