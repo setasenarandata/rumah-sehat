@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> RumahSehat</title>
+    <meta charset="UTF-8">
+    <title> Apoteker </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body class="bg-sky-100">
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <h2>Daftar Seluruh Apoteker</h2>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Nama</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="apoteker, iterationStatus : ${listApoteker}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${apoteker.username}"></td>
+            <td th:text="${apoteker.email}"></td>
+            <td th:text="${apoteker.nama}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/user/add-apoteker}" class="mx-2 btn btn-outline-primary">Tambah apoteker</a>
+    <a class="btn btn-primary" href="/">Home</a>
+<!--    <a th:href="@{/user/add}" class="mx-2 btn btn-outline-success">Tambah User Baru</a>-->
+</div>
+
+</body>
+
+</html>
