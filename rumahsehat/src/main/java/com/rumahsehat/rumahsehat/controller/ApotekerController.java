@@ -1,6 +1,7 @@
 package com.rumahsehat.rumahsehat.controller;
 
 import com.rumahsehat.rumahsehat.model.ApotekerModel;
+import com.rumahsehat.rumahsehat.model.DokterModel;
 import com.rumahsehat.rumahsehat.service.ApotekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ApotekerController {
@@ -34,6 +37,13 @@ public class ApotekerController {
         apotekerService.addApoteker(apoteker);
         model.addAttribute("apoteker", apoteker);
 
-        return "redirect:/";
+        return "manajemen-user";
     }
+    @GetMapping(value = "/user/viewall-apoteker")
+    private String listSemuaApoteker(@ModelAttribute ApotekerModel apoteker, Model model){
+        List<ApotekerModel> listApoteker = apotekerService.findAllApoteker();
+        model.addAttribute("listApoteker", listApoteker);
+        return "viewall-apoteker";
+    }
+
 }
