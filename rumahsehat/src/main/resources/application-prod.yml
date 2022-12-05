@@ -24,3 +24,10 @@ spring:
     hibernate.ddl-auto: update
 
     show-sql: true
+
+jwttoken:
+  secret: apap-63
+
+  # in milliseconds (5 mins)
+  expiration: 300000
+
