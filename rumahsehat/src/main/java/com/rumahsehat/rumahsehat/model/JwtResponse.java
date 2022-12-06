@@ -5,17 +5,14 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
 public class JwtResponse implements Serializable {
-
-    private static final long serialVersionUID = -8091879091924046844L;
     private String jwttoken;
+    private String username;
 
-    public void setToken(String token) {
+    public JwtResponse(String token, String name) {
         this.jwttoken = token;
-    }
-
-    public String getToken() {
-        return this.jwttoken;
+        this.username = name;
     }
 }
 
