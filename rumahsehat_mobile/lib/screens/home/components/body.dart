@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
+import '../../tagihan/view_all_tagihan.dart';
 import 'FeaturesCard.dart';
 import 'LandingHeader.dart';
 
@@ -36,6 +37,20 @@ class Body extends StatelessWidget {
           ),
           const SizedBox(
             height: 24,
+          ),
+          FeaturesCard(
+            size: size,
+            title: "My \nTagihan",
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ViewAllTagihan();
+              }));
+            },
+            imagePath: 'assets/images/MyProfile.png',
+            boxColor: Colors.yellow.shade700,
+          ),
+          const SizedBox(
+            height: 32,
           ),
           FeaturesCard(
             size: size,
