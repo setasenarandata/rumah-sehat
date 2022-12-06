@@ -114,9 +114,9 @@ public class PageController {
         if(user == null) {
             user = adminDb.findByUsername(principal.getName());
         }
-        if(user == null) {
-            user = dokterDb.findByUsername(principal.getName());
-        }
+//        if(user == null) {
+//            user = dokterDb.findByUsername(principal.getName());
+//        }
         if(user == null) {
             user = pasienDb.findByUsername(principal.getName());
         }

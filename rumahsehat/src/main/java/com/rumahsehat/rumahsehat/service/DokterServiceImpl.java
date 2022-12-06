@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class DokterServiceImpl implements DokterService{
+public class  DokterServiceImpl implements DokterService{
     @Autowired
     DokterDb dokterDb;
 
@@ -30,3 +30,4 @@ public class DokterServiceImpl implements DokterService{
         return hashedPassword;
     }
 }
+
