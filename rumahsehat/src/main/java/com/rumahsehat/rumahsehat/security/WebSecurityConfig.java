@@ -1,26 +1,16 @@
 package com.rumahsehat.rumahsehat.security;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import com.rumahsehat.rumahsehat.filter.CustomAuthenticationFilter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -34,12 +24,17 @@ public class WebSecurityConfig {
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login-sso", "/validate-ticket").permitAll()
-                .antMatchers("/api/v1/pasien/add").permitAll()
+                .antMatchers("/api/v1/**").permitAll()
 //                .antMatchers("/user/viewall").hasAuthority("admin")
                 .antMatchers("/obat/viewall").hasAnyAuthority("admin", "Apoteker")
                 .antMatchers("/obat/ubah/**").hasAuthority("Apoteker")
                 .antMatchers("/appointment").hasAnyAuthority("admin", "dokter")
                 .antMatchers("/appointment/*").hasAnyAuthority("admin", "dokter")
+                .antMatchers("/user/manajemen-user").hasAuthority("admin")
+                .antMatchers("/user/add-dokter").hasAuthority("admin")
+                .antMatchers("/user/viewall-dokter").hasAuthority("admin")
+                .antMatchers("/user/add-apoteker").hasAuthority("admin")
+                .antMatchers("/user/viewall-apoteker").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

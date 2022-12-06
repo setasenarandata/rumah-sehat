@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -15,6 +16,23 @@ public class PasienRestServiceImpl implements PasienRestService{
 
     @Autowired
     private PasienDb pasienDb;
+
+    @Override
+    public boolean topupSaldo(PasienModel pasien, int amount) {
+        int saldo = pasien.getSaldo();
+        int newSaldo = saldo + amount;
+        pasien.setSaldo(newSaldo);
+        pasienDb.save(pasien);
+        int updatedSaldo = pasien.getSaldo();
+        return updatedSaldo == newSaldo ? true : false;
+        
+    }
+    @Override
+    public Optional<PasienModel> getPasienById(String id) {
+        Optional<PasienModel> pasien = pasienDb.findById(id);
+
+        return pasien;
+    }
 
     @Override
     public PasienModel addPasien(PasienModel pasien){

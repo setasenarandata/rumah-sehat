@@ -60,6 +60,11 @@ public class PageController {
         return "login";
     }
 
+    @RequestMapping("/user/manajemen-user")
+    public String manajemenUser(Model model) {
+        return "manajemen-user";
+    }
+
     private WebClient webClient = WebClient.builder().build();
 
     @GetMapping("/validate-ticket")
