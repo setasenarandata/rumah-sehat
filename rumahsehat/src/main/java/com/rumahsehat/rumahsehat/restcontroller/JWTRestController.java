@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +30,13 @@ public class JWTRestController{
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
+        System.out.println("MASUK LOGIN JWT");
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        System.out.println("INI USERNAME DIA: " + userDetails.getUsername());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenUtils.generateJwtToken(authentication);
 
-        JwtResponse authResponse = new JwtResponse();
-        authResponse.setToken(token);
+        JwtResponse authResponse = new JwtResponse(token, userDetails.getUsername());
         System.out.println("HOI" + ResponseEntity.ok(authResponse));
         return ResponseEntity.ok(authResponse);
     }
