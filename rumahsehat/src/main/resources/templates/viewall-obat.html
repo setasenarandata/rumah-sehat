@@ -17,24 +17,28 @@
   <table class="table">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Nama</th>
-      <th>Stok</th>
-      <th>Harga</th>
+      <th class="text-center">No</th>
+      <th class="text-center">ID</th>
+      <th class="text-center">Nama</th>
+      <th class="text-center">Stok</th>
+      <th class="text-center">Harga</th>
+      <th class="text-center">Opsi</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="text-align:center">
     <tr th:each="obat, iterationStatus : ${listObat}">
       <td th:text="${iterationStatus.count}"></td>
       <td th:text="${obat.id_obat}"></td>
       <td th:text="${obat.nama_obat}"></td>
       <td th:text="${obat.stok}"></td>
       <td th:text="${obat.harga}"></td>
+      <td>
+        <a class="btn btn-primary" th:href="@{/obat/ubah/} + ${obat.id_obat}">Ubah Stok Obat</a>
+      </td>
     </tr>
     </tbody>
   </table>
   <a class="btn btn-primary" href="/static">Home</a>
-  <a th:href="@{/obat/ubah}" class="mx-2 btn btn-outline-success">Ubah Stock Obat</a>
 </div>
 
 </body>
