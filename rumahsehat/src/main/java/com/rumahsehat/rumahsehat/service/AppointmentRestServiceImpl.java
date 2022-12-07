@@ -2,6 +2,7 @@ package com.rumahsehat.rumahsehat.service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rumahsehat.rumahsehat.model.AppointmentModel;
+import com.rumahsehat.rumahsehat.model.PasienModel;
 import com.rumahsehat.rumahsehat.repository.AppointmentDb;
 
 @Service
@@ -60,5 +62,18 @@ public class AppointmentRestServiceImpl implements AppointmentRestService {
                 appointment.setIsDone(true);
             }
         }
+    }
+
+    @Override
+    public List<AppointmentModel> listAppointmentThisPatient(PasienModel pasien) {
+        List<AppointmentModel> listAppointment = appointmentDb.findAll();
+        List<AppointmentModel> appointmentPasien = new ArrayList<AppointmentModel>();
+        for (AppointmentModel appointmentModel : listAppointment) {
+            if (appointmentModel.getPasien() == pasien) {
+                appointmentPasien.add(appointmentModel);
+            }
+        }
+
+        return appointmentPasien;
     }
 }
