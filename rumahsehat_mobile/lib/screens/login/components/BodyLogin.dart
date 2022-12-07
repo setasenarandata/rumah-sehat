@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:rumahsehat_mobile/api/api.dart';
 import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
 
 class BodyLogin extends StatelessWidget {
-  const BodyLogin({
-    Key? key,
-  }) : super(key: key);
+  // const BodyLogin({
+  //   Key? key,
+  // }) : super(key: key);
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +80,7 @@ class BodyLogin extends StatelessWidget {
                                   border: InputBorder.none,
                                   hintText: "Email or Username",
                                   hintStyle:
-                                      TextStyle(color: Colors.grey[400])),
+                                  TextStyle(color: Colors.grey[400])),
                             ),
                           ),
                           Container(
@@ -88,7 +93,7 @@ class BodyLogin extends StatelessWidget {
                                   border: InputBorder.none,
                                   hintText: "Password",
                                   hintStyle:
-                                      TextStyle(color: Colors.grey[400])),
+                                  TextStyle(color: Colors.grey[400])),
                             ),
                           )
                         ],
@@ -98,12 +103,22 @@ class BodyLogin extends StatelessWidget {
                       height: 30,
                     ),
                     InkWell(
-                      onTap: () {
-                        // MIRZA DO LOGIN
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+                      onTap: () async {
+                        try {
+                          Map response = await Api.login(
+                              usernameController.text, passwordController.text);
+                          if (response['jwttoken'] != "Failed"){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomePage()),
+                            );
+                        }
+                        }
+                        catch (e) {
+                          showDialog(context: context,
+                              builder: (BuildContext context) =>
+                                  _buildPopupDialog(context));
+                        }
                         debugPrint("Login");
                       },
                       child: Container(
@@ -167,6 +182,30 @@ class BodyLogin extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+
+  Widget _buildPopupDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Gagal Masuk'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text("Username atau kata sandi yang anda gunakan salah"),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(Colors.black)),
+          child: const Text('Tutup'),
+        ),
+      ],
     );
   }
 }
