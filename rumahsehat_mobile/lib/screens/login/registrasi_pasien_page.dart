@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:rumahsehat_mobile/screens/home/home_page.dart';
+import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 class RegistrasiPasienPage extends StatefulWidget {
@@ -203,7 +204,7 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return HomePage();
+                              return Loginpage();
                             },
                           ),
                         );
@@ -211,17 +212,21 @@ class _RegistrasiPasienPageState extends State<RegistrasiPasienPage> {
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(colors: [
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            colors: [
                               Color.fromRGBO(255, 168, 205, 0.8),
                               Color.fromRGBO(255, 108, 169, .6),
-                            ])),
+                            ],
+                          ),
+                        ),
                         child: Center(
                           child: Text(
                             "Register",
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

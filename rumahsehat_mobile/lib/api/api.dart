@@ -3,18 +3,22 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-class Api{
+class Api {
   static final String url = "http://localhost:8080/api/";
   static final dio = Dio(BaseOptions(baseUrl: url));
-  
-  static Future<Map> login(String username, String password) async{
+
+  static Future<Map> login(String username, String password) async {
+    print("INSIDE LOGIN ASYNC");
+    print("username: " + username);
+    print("password" + password);
     Uri uri = Uri.parse('${url}v1/login/');
     final response = await http.post(
       uri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{'username': username, 'password': password}),
+      body: jsonEncode(
+          <String, String>{'username': username, 'password': password}),
     );
     if (response.statusCode == 200) {
       final Map parsedResponse = json.decode(response.body);
@@ -24,8 +28,6 @@ class Api{
         return parsedResponse;
       }
     }
-    return {
-      "jwttoken": "Failed"
-    };
+    return {"jwttoken": "Failed"};
   }
 }
