@@ -3,14 +3,16 @@ import 'package:rumahsehat_mobile/api/api.dart';
 import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 import 'package:rumahsehat_mobile/screens/login/registrasi_pasien_page.dart';
 
-class BodyLogin extends StatelessWidget {
-  // const BodyLogin({
-  //   Key? key,
-  // }) : super(key: key);
+class BodyLogin extends StatefulWidget {
+  const BodyLogin({Key? key}) : super(key: key);
 
+  @override
+  State<BodyLogin> createState() => _BodyLoginState();
+}
+
+class _BodyLoginState extends State<BodyLogin> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +79,16 @@ class BodyLogin extends StatelessWidget {
                                         color: Colors.grey.shade100))),
                             child: TextField(
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email or Username",
-                                  hintStyle:
-                                  TextStyle(color: Colors.grey[400])),
+                                border: InputBorder.none,
+                                hintText: "Email or Username",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                              controller: usernameController,
+                              onChanged: (value) {
+                                setState(() {});
+                              },
                             ),
                           ),
                           Container(
@@ -90,10 +98,16 @@ class BodyLogin extends StatelessWidget {
                               enableSuggestions: false,
                               autocorrect: false,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Password",
-                                  hintStyle:
-                                  TextStyle(color: Colors.grey[400])),
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                              controller: passwordController,
+                              onChanged: (value) {
+                                setState(() {});
+                              },
                             ),
                           )
                         ],
@@ -105,17 +119,21 @@ class BodyLogin extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         try {
+                          print("INSIDE ON TAP LOGIN");
+                          print("username input: " + usernameController.text);
                           Map response = await Api.login(
                               usernameController.text, passwordController.text);
-                          if (response['jwttoken'] != "Failed"){
+                          if (response['jwttoken'] != "Failed") {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => HomePage()),
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                      username: usernameController.text)),
                             );
-                        }
-                        }
-                        catch (e) {
-                          showDialog(context: context,
+                          }
+                        } catch (e) {
+                          showDialog(
+                              context: context,
                               builder: (BuildContext context) =>
                                   _buildPopupDialog(context));
                         }
@@ -173,7 +191,9 @@ class BodyLogin extends StatelessWidget {
                     ),
                     Text(
                       "Forgot Password?",
-                      style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 148, 251, 1),
+                      ),
                     ),
                   ],
                 ),
@@ -184,7 +204,6 @@ class BodyLogin extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(

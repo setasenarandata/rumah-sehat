@@ -7,11 +7,13 @@ class RSCard extends StatelessWidget {
     required this.size,
     required this.saldo,
     required this.colorAccent,
+    required this.username,
   }) : super(key: key);
 
   final Size size;
   final int saldo;
   final Color colorAccent;
+  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,10 @@ class RSCard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TopupPage()),
+                  MaterialPageRoute(
+                      builder: (context) => TopupPage(
+                            username: username,
+                          )),
                 );
               },
               child: Container(
