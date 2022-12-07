@@ -27,18 +27,22 @@ public class JWTRestController{
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserModel user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
-        System.out.println("MASUK LOGIN JWT");
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        System.out.println("INI USERNAME DIA: " + userDetails.getUsername());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtTokenUtils.generateJwtToken(authentication);
+            System.out.println("MASUK LOGIN JWT");
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            System.out.println("INI USERNAME DIA: " + userDetails.getUsername());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtTokenUtils.generateJwtToken(authentication);
 
-        JwtResponse authResponse = new JwtResponse(token, userDetails.getUsername());
-        System.out.println("HOI" + ResponseEntity.ok(authResponse));
-        return ResponseEntity.ok(authResponse);
+            JwtResponse authResponse = new JwtResponse(token, userDetails.getUsername());
+            System.out.println("HOI" + ResponseEntity.ok(authResponse));
+            return ResponseEntity.ok(authResponse);
+        } catch (Exception e) {
+            return ResponseEntity.ok("Failed to authenticate users");
+        }
     }
 }
 
