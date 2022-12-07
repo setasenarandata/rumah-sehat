@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 import 'components/RSCard.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final String username;
+  const ProfilePage({Key? key, required this.username}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -19,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    futurePasien = fetchMyProfile("402892eb84c828d90184c84754550002");
+    futurePasien = fetchMyProfile(widget.username);
   }
 
   @override
@@ -52,12 +53,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       size: size,
                       saldo: snapshot.data!.saldo,
                       colorAccent: Colors.yellow.shade700,
+                      username: widget.username,
                     ),
                     const SizedBox(height: 80),
                     RSCard(
                       size: size,
                       saldo: snapshot.data!.saldo,
                       colorAccent: Colors.green.shade700,
+                      username: widget.username,
                     ),
                     // Container(
                     //   height: 400,
@@ -84,9 +87,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-Future<Pasien> fetchMyProfile(String id) async {
-  final response =
-      await http.get(Uri.parse('http://localhost:8080/api/v1/pasien/' + id));
+Future<Pasien> fetchMyProfile(String username) async {
+  final response = await http
+      .get(Uri.parse('http://localhost:8080/api/v1/pasien/' + username));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -136,13 +139,3 @@ class Pasien {
     );
   }
 }
-
-// "id": "402892eb84c828d90184c84754550002",
-// "username": "setasena",
-// "isSso": false,
-// "nama": "Setasena Randata",
-// "email": "setasena93@gmail.com",
-// "password": "$2a$10$ZAxCAI6Q9YtSluPQFSMMyeEoHhndCo5R4CXGzTHqk5d2Yb5xARcZm",
-// "role": "Pasien",
-// "saldo": 0,
-// "umur": 21

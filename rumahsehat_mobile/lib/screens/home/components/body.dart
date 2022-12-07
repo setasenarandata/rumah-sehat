@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rumahsehat_mobile/screens/my-appointment/my_appointment.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
+import 'package:rumahsehat_mobile/screens/schedule-appointment/schedule_appointment.dart';
 
 import 'FeaturesCard.dart';
 import 'LandingHeader.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final String username;
+  const Body({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,13 @@ class Body extends StatelessWidget {
           FeaturesCard(
             size: size,
             title: "Schedule\nAppointment",
-            press: () {},
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ScheduleAppointment(
+                  username: username,
+                );
+              }));
+            },
             imagePath: 'assets/images/ScheduleAppointment.png',
             boxColor: Colors.green.shade200,
           ),
@@ -30,7 +39,13 @@ class Body extends StatelessWidget {
           FeaturesCard(
             size: size,
             title: "My\nAppointment",
-            press: () {},
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return MyAppointment(
+                  username: username,
+                );
+              }));
+            },
             imagePath: 'assets/images/MyAppointment.png',
             boxColor: Colors.purple.shade200,
           ),
@@ -42,7 +57,9 @@ class Body extends StatelessWidget {
             title: "My Profile",
             press: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfilePage();
+                return ProfilePage(
+                  username: username,
+                );
               }));
             },
             imagePath: 'assets/images/MyProfile.png',

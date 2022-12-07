@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/screens/profile/topup_page.dart';
 
-class RSCard extends StatelessWidget {
-  const RSCard({
+class AppointmentCard extends StatelessWidget {
+  const AppointmentCard({
     Key? key,
     required this.size,
-    required this.saldo,
+    required this.waktu,
     required this.colorAccent,
-    required this.username,
+    required this.kode,
+    required this.nama_dokter,
+    required this.status,
+    required this.fungsi,
   }) : super(key: key);
 
   final Size size;
-  final int saldo;
+  final String waktu;
   final Color colorAccent;
-  final String username;
+  final String kode;
+  final String nama_dokter;
+  final String status;
+  final Function() fungsi;
 
   @override
   Widget build(BuildContext context) {
@@ -34,36 +40,54 @@ class RSCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/images/rumahsehat_yellow.png',
-                      width: 60, height: 50, fit: BoxFit.cover),
-                  const SizedBox(height: 10),
                   Text(
-                    'IDR ${saldo}',
+                    'Appointment ${kode}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: 18,
                         color: Colors.white),
                   ),
-                  const SizedBox(height: 20),
-                  Text('CARD NUMBER',
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.5), fontSize: 12)),
-                  const SizedBox(height: 15),
-                  const Text('**** **** **** 2111',
-                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Status: ${status}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Waktu: ${waktu}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Text(
+                    'Dr. ${nama_dokter}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Status: ${status}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
             InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TopupPage(
-                            username: username,
-                          )),
-                );
-              },
+              onTap: fungsi,
               child: Container(
                 width: size.width * 0.27,
                 decoration: BoxDecoration(
@@ -75,27 +99,17 @@ class RSCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Top-up',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold)),
                     Container(
                       padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      child: Image.asset('assets/images/female_doctor.png',
+                          width: 120, height: 100, fit: BoxFit.cover),
                     ),
                     // const Spacer(),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

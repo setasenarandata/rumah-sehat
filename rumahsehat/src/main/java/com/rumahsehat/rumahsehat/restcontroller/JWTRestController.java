@@ -30,13 +30,13 @@ public class JWTRestController{
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-
+    
             System.out.println("MASUK LOGIN JWT");
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             System.out.println("INI USERNAME DIA: " + userDetails.getUsername());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtTokenUtils.generateJwtToken(authentication);
-
+    
             JwtResponse authResponse = new JwtResponse(token, userDetails.getUsername());
             System.out.println("HOI" + ResponseEntity.ok(authResponse));
             return ResponseEntity.ok(authResponse);

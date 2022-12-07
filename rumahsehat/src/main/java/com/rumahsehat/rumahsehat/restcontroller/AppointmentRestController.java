@@ -2,11 +2,13 @@ package com.rumahsehat.rumahsehat.restcontroller;
 
 import com.rumahsehat.rumahsehat.model.AppointmentModel;
 import com.rumahsehat.rumahsehat.model.DokterModel;
+import com.rumahsehat.rumahsehat.model.PasienModel;
 import com.rumahsehat.rumahsehat.service.AppointmentRestService;
 import com.rumahsehat.rumahsehat.service.DokterService;
 import com.rumahsehat.rumahsehat.service.PasienRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +41,13 @@ public class AppointmentRestController {
     public List<AppointmentModel> getListAppointments() {
         appointmentRestService.refreshAppointment();
         return appointmentRestService.listAppointmentPatient();
+    }
+
+    @GetMapping(value = "/list-appointment/{username}")
+    public List<AppointmentModel> getListAppointments(@PathVariable("username") String username) {
+        appointmentRestService.refreshAppointment();
+        PasienModel pasien = pasienRestService.getPasienByUsername(username);
+        return appointmentRestService.listAppointmentThisPatient(pasien);
     }
 
     @PostMapping(value = "/appointment")
