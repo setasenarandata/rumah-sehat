@@ -51,4 +51,9 @@ public class PasienRestServiceImpl implements PasienRestService{
         return pasienDb.findAll();
     }
 
+    @Override
+    public PasienModel getPasienByUsername(String username) {
+        return pasienDb.findByUsername(username);
+    }
+
 }

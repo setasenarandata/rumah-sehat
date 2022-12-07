@@ -1,5 +1,6 @@
 package com.rumahsehat.rumahsehat.restcontroller;
 
+import com.rumahsehat.rumahsehat.model.AppointmentModel;
 import com.rumahsehat.rumahsehat.model.PasienModel;
 import com.rumahsehat.rumahsehat.service.PasienRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class PasienRestController {
             return pasienRestService.getPasienById(id).get();
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Pasien dengan id " + id + " tidak ditemukan"
+                    HttpStatus.NOT_FOUND, "Pasien dengan id " + id + " tidak ditemukan"
             );
         }
     }
