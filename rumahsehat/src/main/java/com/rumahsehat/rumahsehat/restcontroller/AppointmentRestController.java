@@ -50,6 +50,11 @@ public class AppointmentRestController {
         return appointmentRestService.listAppointmentThisPatient(pasien);
     }
 
+    @GetMapping(value = "/appointment/{kode}")
+    public AppointmentModel getOneAppointment(@PathVariable("kode") String kode) {
+        return appointmentRestService.getOneAppointment(kode);
+    }
+
     @PostMapping(value = "/appointment")
     public boolean addAppointment(@RequestBody Map<String, String> appointmentModel) throws Exception {
         try {

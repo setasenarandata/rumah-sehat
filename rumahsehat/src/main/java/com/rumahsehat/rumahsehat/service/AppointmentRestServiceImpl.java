@@ -76,4 +76,9 @@ public class AppointmentRestServiceImpl implements AppointmentRestService {
 
         return appointmentPasien;
     }
+
+    @Override
+    public AppointmentModel getOneAppointment(String kode) {
+        return appointmentDb.findById(kode).get();
+    }
 }
