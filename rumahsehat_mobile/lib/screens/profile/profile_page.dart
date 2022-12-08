@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/components/MyProfileCard.dart';
 import 'package:http/http.dart' as http;
 
@@ -62,13 +63,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       colorAccent: Colors.green.shade700,
                       username: widget.username,
                     ),
-                    // Container(
-                    //   height: 400,
-                    //   color: Colors.black,
-                    //   child: Stack(
-                    //     children: <Widget>[],
-                    //   ),
-                    // )
                   ],
                 ),
               );

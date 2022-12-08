@@ -124,13 +124,16 @@ class _BodyLoginState extends State<BodyLogin> {
                           Map response = await Api.login(
                               usernameController.text, passwordController.text);
                           print("Hai");
-                          print (response.values);
-                          if (response['jwttoken'] == 'Unauthorized'){
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  modal(context: context, message: "Hanya pasien yang dapat mengakses aplikasi ini!"));
+                          print(response['jwttoken']);
+                          if (response['jwttoken'] == 'Unauthorized') {
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) => modal(
+                                    context: context,
+                                    message:
+                                        "Hanya pasien yang dapat mengakses aplikasi ini!"));
                           }
+
                           if (response['jwttoken'] != "Failed") {
                             Navigator.push(
                               context,
@@ -140,10 +143,13 @@ class _BodyLoginState extends State<BodyLogin> {
                             );
                           }
                         } catch (e) {
-                          showDialog(
+                          return showDialog(
                               context: context,
-                              builder: (BuildContext context) =>
-                                  modal(context: context, message: "Username atau kata sandi yang anda gunakan salah",));
+                              builder: (BuildContext context) => modal(
+                                    context: context,
+                                    message:
+                                        "Username atau kata sandi yang anda gunakan salah",
+                                  ));
                         }
                         debugPrint("Login");
                       },
@@ -215,11 +221,8 @@ class _BodyLoginState extends State<BodyLogin> {
 }
 
 class modal extends StatelessWidget {
-  const modal({
-    Key? key,
-    required this.context,
-    required this.message
-  }) : super(key: key);
+  const modal({Key? key, required this.context, required this.message})
+      : super(key: key);
 
   final BuildContext context;
   final String message;
