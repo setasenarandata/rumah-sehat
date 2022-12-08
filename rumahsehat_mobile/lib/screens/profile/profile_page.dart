@@ -63,6 +63,25 @@ class _ProfilePageState extends State<ProfilePage> {
                       colorAccent: Colors.green.shade700,
                       username: widget.username,
                     ),
+                    const SizedBox(height: 80),
+                    Container(
+                      width: size.width * 0.5,
+                      height: size.height * 0.05,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Loginpage()),
+                          );
+                          ;
+                        },
+                        child: Text("Logout"),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    )
                   ],
                 ),
               );
