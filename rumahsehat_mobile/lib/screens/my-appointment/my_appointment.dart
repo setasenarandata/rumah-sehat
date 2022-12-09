@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rumahsehat_mobile/constants.dart';
+import 'package:rumahsehat_mobile/screens/my-appointment/appointment_detail.dart';
 import 'package:rumahsehat_mobile/screens/my-appointment/components/AppointmentCard.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
@@ -81,7 +82,16 @@ class _MyAppointmentState extends State<MyAppointment> {
                       status: snapshot.data![i].isDone == true
                           ? "Selesai"
                           : "Belum selesai",
-                      fungsi: () {},
+                      fungsi: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AppointmentDetail(
+                                    kode: snapshot.data![i].kode,
+                                    nama_pasien: snapshot.data![i].pasien.nama,
+                                  )),
+                        );
+                      },
                     ),
                   );
                   list.add(SizedBox(

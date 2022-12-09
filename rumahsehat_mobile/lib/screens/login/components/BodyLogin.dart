@@ -123,6 +123,17 @@ class _BodyLoginState extends State<BodyLogin> {
                           print("username input: " + usernameController.text);
                           Map response = await Api.login(
                               usernameController.text, passwordController.text);
+                          print("Hai");
+                          print(response['jwttoken']);
+                          if (response['jwttoken'] == 'Unauthorized') {
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) => modal(
+                                    context: context,
+                                    message:
+                                        "Hanya pasien yang dapat mengakses aplikasi ini!"));
+                          }
+
                           if (response['jwttoken'] != "Failed") {
                             Navigator.push(
                               context,
@@ -132,10 +143,13 @@ class _BodyLoginState extends State<BodyLogin> {
                             );
                           }
                         } catch (e) {
-                          showDialog(
+                          return showDialog(
                               context: context,
-                              builder: (BuildContext context) =>
-                                  _buildPopupDialog(context));
+                              builder: (BuildContext context) => modal(
+                                    context: context,
+                                    message:
+                                        "Username atau kata sandi yang anda gunakan salah",
+                                  ));
                         }
                         debugPrint("Login");
                       },
@@ -204,15 +218,24 @@ class _BodyLoginState extends State<BodyLogin> {
       ),
     );
   }
+}
 
-  Widget _buildPopupDialog(BuildContext context) {
+class modal extends StatelessWidget {
+  const modal({Key? key, required this.context, required this.message})
+      : super(key: key);
+
+  final BuildContext context;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Gagal Masuk'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text("Username atau kata sandi yang anda gunakan salah"),
+          Text(message),
         ],
       ),
       actions: <Widget>[
