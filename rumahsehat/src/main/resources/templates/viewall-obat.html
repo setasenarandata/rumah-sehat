@@ -22,7 +22,7 @@
       <th class="text-center">Nama</th>
       <th class="text-center">Stok</th>
       <th class="text-center">Harga</th>
-      <th class="text-center">Opsi</th>
+      <th th:if="${role == 'Apoteker'}" class="text-center">Opsi</th>
     </tr>
     </thead>
     <tbody style="text-align:center">
@@ -32,7 +32,7 @@
       <td th:text="${obat.nama_obat}"></td>
       <td th:text="${obat.stok}"></td>
       <td th:text="${obat.harga}"></td>
-      <td>
+      <td th:if="${role == 'Apoteker'}">
         <a class="btn btn-primary" th:href="@{/obat/ubah/} + ${obat.id_obat}">Ubah Stok Obat</a>
       </td>
     </tr>

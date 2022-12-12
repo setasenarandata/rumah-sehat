@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/screens/my-appointment/my_appointment.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 import 'package:rumahsehat_mobile/screens/schedule-appointment/schedule_appointment.dart';
+import 'package:rumahsehat_mobile/screens/bills/daftar_tagihan.dart';
 
+import '../../tagihan/view_all_tagihan.dart';
 import 'FeaturesCard.dart';
 import 'LandingHeader.dart';
 
@@ -48,6 +50,20 @@ class Body extends StatelessWidget {
             },
             imagePath: 'assets/images/MyAppointment.png',
             boxColor: Colors.purple.shade200,
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          FeaturesCard(
+            size: size,
+            title: "My Bills",
+            press: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ViewAllTagihan(username: username);
+              }));
+            },
+            imagePath: 'assets/images/paper_money.png',
+            boxColor: Colors.blue.shade200,
           ),
           const SizedBox(
             height: 24,

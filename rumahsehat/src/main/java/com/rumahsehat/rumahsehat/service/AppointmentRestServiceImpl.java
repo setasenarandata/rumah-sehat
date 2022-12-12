@@ -13,13 +13,18 @@ import org.springframework.stereotype.Service;
 
 import com.rumahsehat.rumahsehat.model.AppointmentModel;
 import com.rumahsehat.rumahsehat.model.PasienModel;
+import com.rumahsehat.rumahsehat.model.TagihanModel;
 import com.rumahsehat.rumahsehat.repository.AppointmentDb;
+import com.rumahsehat.rumahsehat.repository.TagihanDb;
 
 @Service
 @Transactional
 public class AppointmentRestServiceImpl implements AppointmentRestService {
     @Autowired
     AppointmentDb appointmentDb;
+
+    @Autowired
+    TagihanDb tagihanDb;
 
     @Override
     public List<AppointmentModel> listAppointmentPatient(){
@@ -53,20 +58,52 @@ public class AppointmentRestServiceImpl implements AppointmentRestService {
 
     @Override
     public void refreshAppointment() {
-        LocalDateTime today = LocalDateTime.now();
-        for (AppointmentModel appointment: appointmentDb.findAll()) {
-            // logic comparison
-            Long diff = Duration.between(appointment.getWaktuAwal(), today).toMillis();
-            diff = TimeUnit.MILLISECONDS.toSeconds(diff);
-            if (diff >= 3600){
-                appointment.setIsDone(true);
+        try {
+            LocalDateTime today = LocalDateTime.now();
+            System.out.println("INSIDE REFRESH APPOINTMENT");
+            for (AppointmentModel appointment: appointmentDb.findAll()) {
+                // logic comparison
+                Long diff = Duration.between(appointment.getWaktuAwal(), today).toMillis();
+                diff = TimeUnit.MILLISECONDS.toSeconds(diff);
+                if (diff >= 3600){
+                    System.out.println("CEK TAGIHAN");
+                    System.out.println(appointment.getTagihan());
+                    if (appointment.getTagihan() == null) {
+                        Integer currBill = tagihanDb.findAll().size()+1; 
+                        TagihanModel tagihan = new TagihanModel();
+                        tagihan.setKode("BILL-" + String.valueOf(currBill));
+                        tagihan.setKode_appointment(appointment.getKode());
+                        tagihan.setIsPaid(false);
+                        tagihan.setJumlahTagihan(appointment.getDokter().getTarif());
+                        tagihan.setTanggalTerbuat(LocalDateTime.now());
+
+                        System.out.println("TAGIHAN ENTRIES");
+                        System.out.println(tagihan.getKode());
+                        System.out.println(tagihan.getKode_appointment());
+                        System.out.println(tagihan.getIsPaid());
+                        System.out.println(tagihan.getJumlahTagihan());
+                        System.out.println(tagihan.getTanggalTerbuat());
+                        System.out.println("STAGE 0");
+                        tagihanDb.save(tagihan);
+                        System.out.println("STAGE 1");
+                        
+                    }
+                    
+                    appointment.setIsDone(true);
+
+                }
             }
+        } catch (Exception e) {
+            System.out.println("FOUND AN ERROR");
+            System.out.println(e);
         }
     }
 
     @Override
     public List<AppointmentModel> listAppointmentThisPatient(PasienModel pasien) {
+        System.out.println("INSIDE LIST APPOINTMENT THIS PATIENT");
         List<AppointmentModel> listAppointment = appointmentDb.findAll();
+        System.out.println("Size: " + listAppointment.size());
         List<AppointmentModel> appointmentPasien = new ArrayList<AppointmentModel>();
         for (AppointmentModel appointmentModel : listAppointment) {
             if (appointmentModel.getPasien() == pasien) {

@@ -1,6 +1,7 @@
 package com.rumahsehat.rumahsehat.service;
 
 import com.rumahsehat.rumahsehat.model.DokterModel;
+import com.rumahsehat.rumahsehat.model.ResepModel;
 
 import java.util.List;
 

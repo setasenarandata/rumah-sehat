@@ -1,7 +1,12 @@
 package com.rumahsehat.rumahsehat.service;
 
 import com.rumahsehat.rumahsehat.model.DokterModel;
+import com.rumahsehat.rumahsehat.model.ResepModel;
 import com.rumahsehat.rumahsehat.repository.DokterDb;
+import com.rumahsehat.rumahsehat.repository.ResepDb;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,9 +16,14 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class DokterServiceImpl implements DokterService{
+
     @Autowired
     DokterDb dokterDb;
+
+    @Autowired
+    ResepDb resepDb;
 
     @Override
     public void addDokter(DokterModel dokter) {dokterDb.save(dokter);
@@ -36,3 +46,4 @@ public class DokterServiceImpl implements DokterService{
         return dokterDb.findAll();
     }
 }
+
