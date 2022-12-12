@@ -16,22 +16,24 @@
     <div class="card-body">
         <div class="justify-content-center">
             <h2>Detail Resep</h2>
-            <div sec:authorize="hasAuthority('APOTEKER')">
-                <span style="float: right;">
-                    <a class="btn btn-danger" th:href="@{/}" style="width: 200px;">Konfirmasi Resep</a>
-                </span>
-            </div>
+            <form th:action="@{/konfirmasi-resep/} + ${idAppointment}" th:object="${resep}" method="POST">
+                <div sec:authorize="hasAuthority('Apoteker')">
+                    <button class="btn btn-primary" type="submit">Konfirmasi Resep</button>
+                </div>
+            </form>
+
             <br>
-            <p th:text="'ID Resep: ' + ${resep.id}" style="font-weight: bold;"></p>
-            <p th:text="'Nama Dokter: ' + ${namaDokter}"></p>
-            <p th:text="'Nama Pasien: ' + ${namaPasien}"></p>
             <p>Status Resep:
                 <span>
-                    <td th:if="${resep.isDone == false}" style="text-align: center">Not Done</td>
-                    <td th:unless="${resep.isDone == false}" style="text-align: center">Done</td>
+                    <td th:if="${resep.isDone == false}">Not Done</td>
+                    <td th:unless="${resep.isDone == false}">Done</td>
                 </span>
             </p>
-            <p th:text="'Nama Apoteker: ' + ${namaApoteker}"></p>
+
+            <p th:text="'Resep: ' + ${resep.id}"></p>
+            <p th:text="'Dokter: ' + ${namaDokter}"></p>
+            <p th:text="'Pasien: ' + ${namaPasien}"></p>
+            <p th:text="'Apoteker: ' + ${namaApoteker}"></p>
 
             <br>
             <h4>Daftar Obat</h4>
@@ -40,16 +42,16 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="text-align: center;">No</th>
-                        <th>Nama Obat</th>
-                        <th style="text-align: center;">Jumlah</th>
+                        <th>No</th>
+                        <th>Obat</th>
+                        <th>Jumlah</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="jumlahObat, iterationStatus : ${listJumlahObat}">
-                        <td th:text="${iterationStatus.count}" style="text-align: center;"></td>
+                        <td th:text="${iterationStatus.count}"></td>
                         <td th:text="${jumlahObat.obat.nama_obat}"></td>
-                        <td th:text="${jumlahObat.kuantitas}" style="text-align: center;"></td>
+                        <td th:text="${jumlahObat.kuantitas}"></td>
                     </tr>
                     </tbody>
                 </table>
