@@ -6,6 +6,7 @@ import com.rumahsehat.rumahsehat.model.PasienModel;
 import com.rumahsehat.rumahsehat.service.AppointmentRestService;
 import com.rumahsehat.rumahsehat.service.DokterService;
 import com.rumahsehat.rumahsehat.service.PasienRestService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
+@Slf4j
 @RequestMapping("/api/v1")
 public class AppointmentRestController {
 
@@ -36,17 +38,20 @@ public class AppointmentRestController {
 
     @GetMapping(value = "/list-doctor")
     public List<DokterModel> retrieveListDoctor(){
+        log.info("Initiating retrieve list doctor");
         return dokterService.findAllDokter();
     }
 
     @GetMapping(value = "/list-appointment")
     public List<AppointmentModel> getListAppointments() {
+        log.info("Initiating getListAppointments");
         appointmentRestService.refreshAppointment();
         return appointmentRestService.listAppointmentPatient();
     }
 
     @GetMapping(value = "/list-appointment/{username}")
     public List<AppointmentModel> getListAppointments(@PathVariable("username") String username) {
+        log.info("Initiating getListAppointments for username: " + username);
         appointmentRestService.refreshAppointment();
         PasienModel pasien = pasienRestService.getPasienByUsername(username);
         return appointmentRestService.listAppointmentThisPatient(pasien);
@@ -54,12 +59,14 @@ public class AppointmentRestController {
 
     @GetMapping(value = "/appointment/{kode}")
     public AppointmentModel getOneAppointment(@PathVariable("kode") String kode) {
+        log.info("Initiating getOneAppointment with kode: " + kode);
         return appointmentRestService.getOneAppointment(kode);
     }
 
     @PostMapping(value = "/appointment")
     public boolean addAppointment(@RequestBody Map<String, String> appointmentModel) throws Exception {
         try {
+            log.info("Initiating add appointment");
             System.out.println("INSIDE APPOINTMENT POST MAPPING");
             System.out.println("Username: " + appointmentModel.get("username"));
             System.out.println("Doctor: " + appointmentModel.get("dokter"));
@@ -93,6 +100,7 @@ public class AppointmentRestController {
                 return false;
             }
         } catch (Exception e) {
+            log.error("Error while adding appointment");
             System.out.println(e);
             return false;
         }

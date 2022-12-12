@@ -70,9 +70,12 @@ public class PasienRestController {
     }@PutMapping(value = "/pasien/{username}/bayarTagihan/{amount}")
     private PasienModel bayarTagihan(@PathVariable("username") String username, @PathVariable int amount){
         try{
+            log.info("Initiating bayar tagihan");
+            log.info("Targeted username: " + username);
             return pasienRestService.bayarTagihan(username, amount);
         }
         catch (NoSuchElementException e){
+            log.error("Error has occured. Cannot find patient.");
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Pasien dengan username " + username + " tidak ditemukan"
             );
