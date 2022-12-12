@@ -27,8 +27,8 @@ class Api {
       if (!isTokenExpired) {
         return parsedResponse;
       }
-    } else if (response.statusCode == 403){
-      return {"jwttoken":"Unauthorized"};
+    } else if (response.statusCode == 403) {
+      return {"jwttoken": "Unauthorized"};
     }
     return {"jwttoken": "Failed"};
   }
