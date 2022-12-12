@@ -52,9 +52,11 @@ public class TagihanRestController {
         }
     }
 
-    @GetMapping(value = "/tagihan/{pasienId}")
+    @GetMapping(value = "/list-tagihan/{pasienId}")
     private List<TagihanModel> getTagihanByPasienId(@PathVariable("pasienId") String pasienId) {
-        PasienModel pasien = pasienRestService.getPasienById(pasienId).get();
+        System.out.println("INSIDE LIST TAGIHAN PASIEN");
+        PasienModel pasien = pasienRestService.getPasienByUsername(pasienId);
+        System.out.println(pasien.getNama());
         return tagihanRestService.findAllByPasien(pasien);
         // if (pasien.isPresent()) {
         // } 
