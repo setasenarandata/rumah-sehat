@@ -3,6 +3,7 @@ package com.rumahsehat.rumahsehat.controller;
 
 import com.rumahsehat.rumahsehat.model.ObatModel;
 import com.rumahsehat.rumahsehat.service.ObatService;
+import com.rumahsehat.rumahsehat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,11 +20,16 @@ public class ObatController {
     @Autowired
     public ObatService obatService;
 
+    @Autowired
+    public UserService userService;
+
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/daftar-obat")
     public String listAllObat(Model model){
         List<ObatModel> listObat = obatService.getListObat();
+        String userRole = userService.getUserRole();
         model.addAttribute("listObat", listObat);
+        model.addAttribute("role", userRole);
         return "viewall-obat";
     }
 
