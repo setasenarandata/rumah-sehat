@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Halaman tidak ditemukan</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-sky-100">
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <p class="text-3xl text-black">
+          <span class="text-blue-400 font-bold">Anda tidak memiliki akses ke halaman ini</span>
+        </p>
+        <br>
+        <a th:href="@{/}" class="btn btn-secondary">Kembali ke beranda</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
