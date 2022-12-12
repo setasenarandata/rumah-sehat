@@ -10,7 +10,42 @@
 
 <body class="bg-sky-100">
 <nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="justify-content-center">
+                    <h2 th:text="'Detail Appointment '+ ${appointment.kode}" class="font-weight-bold"></h2>
+                    <br>
+                    <hr>
+                    <br>
+                    <p th:text="'Waktu Awal : ' + ${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}"></p>
+                    <p th:if="${appointment.isDone} != true">Status Appointment : Belum selesai</p>
+                    <p th:unless="${appointment.isDone} != true">Status Appointment : Sudah selesai</p>
+                    <p th:text="'Nama Dokter : ' + ${appointment.dokter.nama}"></p>
+                    <p th:text="'Nama Pasien : ' + ${appointment.pasien.nama}"></p>
+                    <br>
+                    <a class="btn btn-primary" th:if="${appointment.resep == null} and ${role == 'dokter'}" th:href="@{/resep/add/}">Create Resep</a>
+                    <a class="btn btn-primary" th:if="${appointment.resep != null}" th:href="@{/resep/view/}">Lihat Resep</a>
+                    <a class="btn btn-secondary" href="/appointment/viewall">Kembali</a>
+                    <br>
 
+                    <div th:if="${appointment.isDone} != true">
+                        <a th:if="${appointment.resep == null} and ${role == 'dokter'}"
+                           th:href="@{/appointment/finish(kode=${appointment.kode})}" class="btn btn-danger"
+                           th:warning-msg="|Apakah anda yakin ingin menyelesaikan appointment tanpa resep?|" onclick="if (!confirm(this.getAttribute('warning-msg'))) return false">
+                            Selesaikan Appointment
+                        </a>
+                        <a th:if="${appointment.resep != null} and ${role == 'dokter'}"
+                           th:href="@{/appointment/finish(kode=${appointment.kode})}" class="btn btn-danger">
+                            Selesai
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>
