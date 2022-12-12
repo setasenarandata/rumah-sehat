@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:rumahsehat_mobile/screens/bills/detail_tagihan.dart';
+import 'package:rumahsehat_mobile/screens/home/home_page.dart';
 
 class DaftarTagihanPage extends StatelessWidget {
-  const DaftarTagihanPage({Key? key}) : super(key: key);
+  final String username;
+  const DaftarTagihanPage({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,11 @@ class DaftarTagihanPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: BackButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(username: username)),
+          ),
         ),
       ),
       backgroundColor: Colors.white,
@@ -58,7 +65,19 @@ class DaftarTagihanPage extends StatelessWidget {
                 padding: EdgeInsets.all(30.0),
                 child: Column(
                   children: <Widget>[
-                    ElevatedButton(onPressed: () {}, child: Text('tes'))
+                    ElevatedButton(
+                        onPressed: () async {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return DetailTagihanPage(
+                                    kode: "1", username: username);
+                              },
+                            ),
+                          );
+                        },
+                        child: Text('tes'))
                   ],
                 ),
               ),

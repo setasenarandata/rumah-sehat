@@ -60,5 +60,11 @@ public class PasienRestServiceImpl implements PasienRestService{
             return null;
         }
     }
+    @Override
+    public PasienModel bayarTagihan(String username, int amount){
+        PasienModel pasien = getPasienByUsername(username);
+        pasien.setSaldo(pasien.getSaldo() - amount);
+        return pasienDb.save(pasien);
+    }
 
 }

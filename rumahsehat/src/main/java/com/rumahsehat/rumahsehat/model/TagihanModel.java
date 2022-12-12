@@ -1,5 +1,6 @@
 package com.rumahsehat.rumahsehat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class TagihanModel implements Serializable {
     @Column(name = "jumlah_tagihan", nullable = false)
     private Integer jumlahTagihan;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "tagihan")
     private AppointmentModel appointment;
 

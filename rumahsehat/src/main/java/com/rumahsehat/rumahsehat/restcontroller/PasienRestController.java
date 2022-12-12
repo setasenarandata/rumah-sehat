@@ -1,18 +1,12 @@
 package com.rumahsehat.rumahsehat.restcontroller;
 
 import com.rumahsehat.rumahsehat.model.PasienModel;
+import com.rumahsehat.rumahsehat.model.TagihanModel;
 import com.rumahsehat.rumahsehat.service.PasienRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
@@ -57,5 +51,17 @@ public class PasienRestController {
                 HttpStatus.NOT_FOUND, "Pasien dengan username " + username + " tidak ditemukan"
             );
         }
+    }@PutMapping(value = "/pasien/{username}/bayarTagihan/{amount}")
+    private PasienModel bayarTagihan(@PathVariable("username") String username, @PathVariable int amount){
+        try{
+            return pasienRestService.bayarTagihan(username, amount);
+        }
+        catch (NoSuchElementException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Pasien dengan username " + username + " tidak ditemukan"
+            );
+        }
+
     }
+
 }

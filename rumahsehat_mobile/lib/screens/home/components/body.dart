@@ -58,7 +58,7 @@ class Body extends StatelessWidget {
             title: "My Bills",
             press: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DaftarTagihanPage();
+                return DaftarTagihanPage(username: username);
               }));
             },
             imagePath: 'assets/images/MyProfile.png',
