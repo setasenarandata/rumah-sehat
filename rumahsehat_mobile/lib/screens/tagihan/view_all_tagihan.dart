@@ -62,68 +62,42 @@ class ViewAllTagihanState extends State<ViewAllTagihan> {
                       itemCount: listTagihan?.length,
                       itemBuilder: (BuildContext context, int index) {
                         return
-                          Card(
-                            child: Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    snapshot.data![index].kode,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                        Container(
+                            child: Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          // color: kTextLightColor,
+                                          blurRadius: 2.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(listTagihan![index].kode, style: Theme.of(context).textTheme.caption),
+                                            Text(listTagihan![index].isPaid.toString(), style: Theme.of(context).textTheme.caption),
+                                            Text(listTagihan![index].tanggalTerbuat, style: Theme.of(context).textTheme.caption),
+                                            Text(listTagihan![index].jumlahTagihan.toString(), style: Theme.of(context).textTheme.subtitle1),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          // height: kDefaultPadding,
+                                          child: Divider(
+                                            thickness: 1.0,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(height: 7),
-                                  Text("Kode : " + listTagihan![index].kode, style: Theme.of(context).textTheme.caption),
-                                  Text("Status : " + listTagihan![index].isPaid.toString(), style: Theme.of(context).textTheme.caption),
-                                  Text("Tanggal Terbuat : " + listTagihan![index].tanggalTerbuat, style: Theme.of(context).textTheme.caption),
-                                  Text("Jumlah Tagihan : " + listTagihan![index].jumlahTagihan.toString(), style: Theme.of(context).textTheme.subtitle1),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                ],
-                              ),
-                            ),
+                                ]),
                           );
-
-                        // Container(
-                          //   child: Column(
-                          //       children: [
-                          //         Container(
-                          //           decoration: BoxDecoration(
-                          //             borderRadius: BorderRadius.vertical(
-                          //             ),
-                          //             color: Colors.white,
-                          //             boxShadow: [
-                          //               BoxShadow(
-                          //                 // color: kTextLightColor,
-                          //                 blurRadius: 2.0,
-                          //               ),
-                          //             ],
-                          //           ),
-                          //           child: Column(
-                          //             children: [
-                          //               Row(
-                          //                 children: [
-                          //                   Text(listTagihan![index].kode, style: Theme.of(context).textTheme.caption),
-                          //                   Text(listTagihan![index].isPaid.toString(), style: Theme.of(context).textTheme.caption),
-                          //                   Text(listTagihan![index].tanggalTerbuat, style: Theme.of(context).textTheme.caption),
-                          //                   Text(listTagihan![index].jumlahTagihan.toString(), style: Theme.of(context).textTheme.subtitle1),
-                          //                 ],
-                          //               ),
-                          //               SizedBox(
-                          //                 // height: kDefaultPadding,
-                          //                 child: Divider(
-                          //                   thickness: 1.0,
-                          //                 ),
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //       ]),
-                          // );
                       }
                   );
 

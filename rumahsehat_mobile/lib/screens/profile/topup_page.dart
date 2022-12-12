@@ -7,7 +7,8 @@ import 'package:rumahsehat_mobile/screens/profile/components/ProfileTopup.dart';
 import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 
 class TopupPage extends StatefulWidget {
-  const TopupPage({Key? key}) : super(key: key);
+  final String username;
+  const TopupPage({Key? key, required this.username}) : super(key: key);
 
   @override
   State<TopupPage> createState() => _TopupPageState();
@@ -109,14 +110,16 @@ class _TopupPageState extends State<TopupPage> {
                       width: double.infinity,
                       child: TextButton(
                         onPressed: () async {
-                          bool isSuccess = await patchSaldo(
-                              "402892eb84c828d90184c84754550002", amount);
+                          bool isSuccess =
+                              await patchSaldo(widget.username, amount);
 
                           if (isSuccess) {
                             print("top up saldo sukses!!");
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProfilePage();
+                              return ProfilePage(
+                                username: widget.username,
+                              );
                             }));
                           }
                         },

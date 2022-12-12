@@ -20,11 +20,11 @@ class TagihanModel {
     );
   }
 
-  String getStatus() {
-    if (this.isPaid) {
-      return "Lunas";
-    } else {
-      return "Belum Lunas";
-    }
-  }
+  // String getStatus() {
+  //   if (this.isPaid) {
+  //     return "Lunas";
+  //   } else {
+  //     return "Belum Lunas";
+  //   }
+  // }
 }

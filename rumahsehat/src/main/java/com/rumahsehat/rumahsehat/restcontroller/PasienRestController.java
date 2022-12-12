@@ -5,6 +5,7 @@ import com.rumahsehat.rumahsehat.service.PasienRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
 public class PasienRestController {
@@ -36,23 +38,23 @@ public class PasienRestController {
         }
     }
 
-    @PatchMapping(value = "/pasien/{id}/topup/{amount}")
-    private boolean topupSaldo(@PathVariable("id") String id, @PathVariable("amount") int amount){
-        PasienModel pasien = pasienRestService.getPasienById(id).get();
+    @PatchMapping(value = "/pasien/{username}/topup/{amount}")
+    private boolean topupSaldo(@PathVariable("username") String username, @PathVariable("amount") int amount){
+        PasienModel pasien = pasienRestService.getPasienByUsername(username);
         boolean isSuccess = pasienRestService.topupSaldo(pasien, amount);
 
         return isSuccess ? true : false;
     }
 
-    @GetMapping(value = "/pasien/{id}")
-    private PasienModel getPasienById(@PathVariable("id") String id) {
+    @GetMapping(value = "/pasien/{username}")
+    private PasienModel getPasienById(@PathVariable("username") String username) {
         try {
             System.out.println("ENTER GET MAPPING");
-            System.out.println("ID: " + id);
-            return pasienRestService.getPasienById(id).get();
+            System.out.println("username: " + username);
+            return pasienRestService.getPasienByUsername(username);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Pasien dengan id " + id + " tidak ditemukan"
+                HttpStatus.NOT_FOUND, "Pasien dengan username " + username + " tidak ditemukan"
             );
         }
     }

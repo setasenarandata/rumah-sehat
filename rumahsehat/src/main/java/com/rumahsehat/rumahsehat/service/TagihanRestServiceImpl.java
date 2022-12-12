@@ -16,7 +16,7 @@ public class TagihanRestServiceImpl implements TagihanRestService {
 
     @Override
     public List<TagihanModel> findAllByPasien(String idPasien) {
-        //bikin condition buat nyari tagihan punya user itu doang
+        //condition buat nyari tagihan punya user itu doang
         return tagihanDb.findAll();
     }
 
