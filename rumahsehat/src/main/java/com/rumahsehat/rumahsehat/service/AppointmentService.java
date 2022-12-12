@@ -9,7 +9,7 @@ public interface AppointmentService {
 
     UserModel findUserByUsername(User user);
 
-    List<AppointmentModel> getListAppointment(User used);
+    List<AppointmentModel> getListAppointment(String username);
 
     AppointmentModel getAppointmentById(String kode);
     String finishAppointment(String kode);

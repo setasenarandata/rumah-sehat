@@ -32,7 +32,7 @@ UserService userService;
         String role = userService.getUserRole();
         System.out.println("masuk");
         System.out.println(users.getUsername());
-        List<AppointmentModel> listAppointment = appointmentService.getListAppointment(users);
+        List<AppointmentModel> listAppointment = appointmentService.getListAppointment(users.getUsername());
         System.out.println(listAppointment.size());
         if (listAppointment != null) {
             model.addAttribute("listAppointment", listAppointment);

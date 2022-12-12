@@ -32,6 +32,8 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Autowired
     DokterDb dokterDb;
     @Autowired
+    DokterService dokterService;
+    @Autowired
     TagihanDb tagihanDb;
 
     @Autowired
@@ -41,30 +43,38 @@ public class AppointmentServiceImpl implements AppointmentService{
     ApotekerDb apotekerDb;
 
     @Override
-    public List<AppointmentModel> getListAppointment(User used) {
-        UserModel user = findUserByUsername(used);
+    public List<AppointmentModel> getListAppointment(String username) {
+        UserModel user = null;
+        if (dokterService.findByUsername(username) != null) {
+            user = dokterService.findByUsername(username);
+        } else if (adminDb.findByUsername(username) != null) {
+            user = adminDb.findByUsername(username);
+        }
         List<AppointmentModel> find = appointmentDb.findAll();
+        List<AppointmentModel> appointmentDokter = new ArrayList<AppointmentModel>();
         if (user == null) {
             return null;
         }
-        if (user.getRole().equals("dokter")) {
-            List<AppointmentModel> appointmentDokter = new ArrayList<AppointmentModel>();
+        if (user.getRole().equals("Dokter")) {
             for (AppointmentModel appointment : find) {
                 if (appointment.getDokter().getId().equals(user.getId())) {
                     appointmentDokter.add(appointment);
                 }
             }
-            find = appointmentDokter;
-        } else if (user.getRole().equals("pasien")) {
-            List<AppointmentModel> appointmentPasien = new ArrayList<AppointmentModel>();
-            for (AppointmentModel appointment : find) {
-                if (appointment.getDokter().getId().equals(user.getId())) {
-                    appointmentPasien.add(appointment);
-                }
-            }
-            find = appointmentPasien;
-        }
-        return find;
+            return appointmentDokter;
+        } else if (user.getRole().equals("admin")) {
+            return find;
+        } else return null;
+//        } else if (dokter.getRole().equals("pasien")) {
+//            List<AppointmentModel> appointmentPasien = new ArrayList<AppointmentModel>();
+//            for (AppointmentModel appointment : find) {
+//                if (appointment.getDokter().getId().equals(dokter.getId())) {
+//                    appointmentPasien.add(appointment);
+//                }
+//            }
+//            find = appointmentPasien;
+//        }
+//        return find;
     }
 
     @Override
@@ -98,7 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         tagihanModel.setTanggalTerbuat(tanggalAppoint);
 
         tagihanModel.setJumlahTagihan(appointmentModel.getDokter().getTarif());
-        tagihanModel.setAppointment(appointmentModel);
+        tagihanModel.setKode_appointment(appointmentModel.getKode());
         tagihanDb.save(tagihanModel);
     }
 
