@@ -5,14 +5,12 @@ import 'dart:convert';
 class Tagihan {
   final String kode;
   final String tanggalTerbuat;
-  final String tanggalBayar;
   final bool isPaid;
   final int jumlahTagihan;
 
   const Tagihan(
       {required this.kode,
       required this.tanggalTerbuat,
-      required this.tanggalBayar,
       required this.isPaid,
       required this.jumlahTagihan});
 
@@ -20,7 +18,6 @@ class Tagihan {
     return Tagihan(
         kode: json['kode'],
         tanggalTerbuat: json['tanggalTerbuat'],
-        tanggalBayar: json['tanggalBayar'],
         isPaid: json['isPaid'],
         jumlahTagihan: json['jumlahTagihan']);
   }

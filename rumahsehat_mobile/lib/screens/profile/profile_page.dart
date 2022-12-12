@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rumahsehat_mobile/screens/login/login_page.dart';
 import 'package:rumahsehat_mobile/screens/profile/components/MyProfileCard.dart';
 import 'package:http/http.dart' as http;
+import 'package:rumahsehat_mobile/screens/profile/topup_page.dart';
 
 import 'components/RSCard.dart';
 
@@ -55,13 +56,35 @@ class _ProfilePageState extends State<ProfilePage> {
                       saldo: snapshot.data!.saldo,
                       colorAccent: Colors.yellow.shade700,
                       username: widget.username,
+                      rightTitle: "Top-up",
+                      details: "Card Number",
+                      fungsi: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TopupPage(username: widget.username)),
+                        );
+                      },
+                      decoration: "**** **** **** **11",
                     ),
                     const SizedBox(height: 80),
                     RSCard(
                       size: size,
                       saldo: snapshot.data!.saldo,
-                      colorAccent: Colors.green.shade700,
+                      colorAccent: Colors.yellow.shade700,
                       username: widget.username,
+                      rightTitle: "Top-up",
+                      details: "Card Number",
+                      fungsi: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TopupPage(username: widget.username)),
+                        );
+                      },
+                      decoration: "**** **** **** **11",
                     ),
                     const SizedBox(height: 80),
                     Container(

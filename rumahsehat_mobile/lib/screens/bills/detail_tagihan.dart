@@ -10,6 +10,8 @@ import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:rumahsehat_mobile/screens/tagihan/view_all_tagihan.dart';
+
 class DetailTagihanPage extends StatefulWidget {
   final String kode;
   final String username;
@@ -43,8 +45,8 @@ class _DetailTagihanPageState extends State<DetailTagihanPage> {
           onPressed: () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    DaftarTagihanPage(username: widget.username)),
+              builder: (context) => ViewAllTagihan(username: widget.username),
+            ),
           ),
         ),
       ),
@@ -195,8 +197,8 @@ class _DetailTagihanPageState extends State<DetailTagihanPage> {
                                                   .add_yMd()
                                                   .add_jm()
                                                   .format(DateTime.parse(
-                                                      snapshot
-                                                          .data!.tanggalBayar)),
+                                                      snapshot.data!
+                                                          .tanggalTerbuat)),
                                               style: TextStyle(
                                                 fontSize: 14,
                                               ),
@@ -355,7 +357,7 @@ class _DetailTagihanPageState extends State<DetailTagihanPage> {
                                                       snapshot
                                                           .data!.tanggalTerbuat,
                                                       snapshot
-                                                          .data!.tanggalBayar,
+                                                          .data!.tanggalTerbuat,
                                                       true,
                                                       snapshot
                                                           .data!.jumlahTagihan);
@@ -446,7 +448,7 @@ Future<void> updateTagihan(String kode, String tanggalTerbuat,
         },
         body: jsonEncode(<String, dynamic>{
           "tanggalTerbuat": tanggalTerbuat,
-          "tanggalBayar": tanggalBayar,
+          "tanggalBayar": tanggalTerbuat,
           "isPaid": isPaid,
           "jumlahTagihan": jumlahTagihan
         }),

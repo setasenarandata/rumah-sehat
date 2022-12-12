@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +54,11 @@ public class AppointmentRestController {
     public List<AppointmentModel> getListAppointments(@PathVariable("username") String username) {
         log.info("Initiating getListAppointments for username: " + username);
         appointmentRestService.refreshAppointment();
+        System.out.println("DONE REFRESH APPOINTMENT");
         PasienModel pasien = pasienRestService.getPasienByUsername(username);
-        return appointmentRestService.listAppointmentThisPatient(pasien);
+        List<AppointmentModel> kosong = new ArrayList<AppointmentModel>();
+        List<AppointmentModel> list = appointmentRestService.listAppointmentThisPatient(pasien);
+        return list;
     }
 
     @GetMapping(value = "/appointment/{kode}")
@@ -91,6 +95,7 @@ public class AppointmentRestController {
             appointment.setKode("APT-" + nomor_urut);
 
             boolean isAppointmentValid = appointmentRestService.isAppointmentValid(appointment);
+            
 
             if (isAppointmentValid) {
                 appointmentRestService.save(appointment);
