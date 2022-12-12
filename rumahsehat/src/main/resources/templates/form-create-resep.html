@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body class="bg-sky-100">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Dokter Baru</h2>
+                <br>
+                <form th:action="@{/create-resep/} + ${idAppointment}" th:object="${resep}" method="POST">
+                    Kode Appointment: <br>
+                    <input class="form-control" type="hidden" th:value="${idAppointment}" readonly/>
+                    <br>
+                    <table class="table">
+                        <thead>
+                        <th>Daftar Obat</th>
+                        </thead>
+                        <tbody>
+            
+                        <tr th:each="obat, iterationStatus : *{listJumlah}">
+                            <td>
+                            <select name="id_obat" class="select2 form-control" th:field="*{listJumlah[__${iterationStatus.index}__].obat.id_obat}">
+                                <option th:each="option : ${listObat}" th:value="${option.id_obat}" th:text="${option.nama_obat}"></option>
+                            </select>
+                            </td>
+                            <td>
+                            <input required class="form-control" type="number" placeholder="Kuantitas" th:field="*{listJumlah[__${iterationStatus.index}__].kuantitas}" />
+                            <br><br>
+                            </td>
+                            <td>
+                            <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                                    name="deleteRowObat">Hapus</button>
+                            </td>
+                        </tr>
+                        <th>
+                            <button class="btn btn-primary" type="submit" name="addRowObat">Tambah Obat</button>
+                        </th>
+                        </tbody>
+                        </table>
+                    <button class="btn btn-primary" type="submit">Create Resep</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.select2').select2();
+</script>
+</body>
+</html>
