@@ -11,8 +11,4 @@ public interface DokterService {
 
     List<DokterModel> findAllDokter();
     String encrypt(String pasword);
-
-    boolean saveResep(ResepModel resep);
-    List<ResepModel> getListResep();
-    ResepModel getResepById(Long id);
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @Transactional
 @Slf4j
 public class DokterServiceImpl implements DokterService{
+
     @Autowired
     DokterDb dokterDb;
 
@@ -44,27 +45,5 @@ public class DokterServiceImpl implements DokterService{
     public List<DokterModel> findAllDokter(){
         return dokterDb.findAll();
     }
-
-    @Override
-    public boolean saveResep(ResepModel resep) {
-        try {
-            resepDb.save(resep);
-            return true;
-            
-        } catch (Exception e) {
-            log.error("Error saving resep model");
-            log.error("error", e);
-            return false;
-        }
-    }
-
-    @Override
-    public List<ResepModel> getListResep() {
-        return resepDb.findAll();
-    }
-
-    @Override
-    public ResepModel getResepById(Long id) {
-        return resepDb.findById(id).isPresent() ? resepDb.findById(id).get() : null;
-    }
 }
+

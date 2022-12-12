@@ -4,6 +4,7 @@ import 'package:rumahsehat_mobile/screens/profile/profile_page.dart';
 import 'package:rumahsehat_mobile/screens/schedule-appointment/schedule_appointment.dart';
 import 'package:rumahsehat_mobile/screens/bills/daftar_tagihan.dart';
 
+import '../../tagihan/view_all_tagihan.dart';
 import 'FeaturesCard.dart';
 import 'LandingHeader.dart';
 
@@ -58,10 +59,10 @@ class Body extends StatelessWidget {
             title: "My Bills",
             press: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DaftarTagihanPage(username: username);
+                return ViewAllTagihan(username: username);
               }));
             },
-            imagePath: 'assets/images/MyProfile.png',
+            imagePath: 'assets/images/paper_money.png',
             boxColor: Colors.blue.shade200,
           ),
           const SizedBox(
