@@ -59,10 +59,10 @@ class Body extends StatelessWidget {
             title: "My Bills",
             press: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DaftarTagihanPage(username: username);
+                return ViewAllTagihan(username: username);
               }));
             },
-            imagePath: 'assets/images/MyProfile.png',
+            imagePath: 'assets/images/paper_money.png',
             boxColor: Colors.blue.shade200,
           ),
           const SizedBox(

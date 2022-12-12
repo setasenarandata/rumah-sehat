@@ -8,12 +8,20 @@ class RSCard extends StatelessWidget {
     required this.saldo,
     required this.colorAccent,
     required this.username,
+    required this.rightTitle,
+    required this.details,
+    required this.fungsi,
+    required this.decoration,
   }) : super(key: key);
 
   final Size size;
   final int saldo;
   final Color colorAccent;
   final String username;
+  final String rightTitle;
+  final String details;
+  final String decoration;
+  final Function() fungsi;
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +53,17 @@ class RSCard extends StatelessWidget {
                         color: Colors.white),
                   ),
                   const SizedBox(height: 20),
-                  Text('CARD NUMBER',
+                  Text(details,
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.5), fontSize: 12)),
                   const SizedBox(height: 15),
-                  const Text('**** **** **** 2111',
+                  Text(decoration,
                       style: TextStyle(color: Colors.white, fontSize: 15)),
                 ],
               ),
             ),
             InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TopupPage(
-                            username: username,
-                          )),
-                );
-              },
+              onTap: fungsi,
               child: Container(
                 width: size.width * 0.27,
                 decoration: BoxDecoration(
@@ -75,7 +75,7 @@ class RSCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Top-up',
+                    Text(rightTitle.isEmpty ? "Empty" : rightTitle,
                         style: TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold)),
                     Container(
