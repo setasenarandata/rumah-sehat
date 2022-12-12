@@ -12,7 +12,7 @@
 
 ### List Fitur
 1. [Mobile, Web] Home
-2. [Mobile & Web] Login (Semua user)
+2. [Mobile, Web] Login (Semua user)
 3. [Mobile & Web] Logout
 4. [Web] Manajemen User (Admin)
 5. [Web] Mengubah Stok Obat (Apoteker)
