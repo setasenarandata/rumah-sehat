@@ -6,6 +6,7 @@ import com.rumahsehat.rumahsehat.service.PasienRestService;
 import com.rumahsehat.rumahsehat.model.JwtResponse;
 import com.rumahsehat.rumahsehat.model.PasienModel;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(maxAge = 3600)
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/")
 public class JWTRestController{
@@ -37,6 +39,7 @@ public class JWTRestController{
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserModel user) {
         try {
+            log.info("Initiating user login");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
     
@@ -55,9 +58,11 @@ public class JWTRestController{
             JwtResponse authResponse = new JwtResponse(token, userDetails.getUsername());
             System.out.println("HOI" + ResponseEntity.ok(authResponse));
             return ResponseEntity.ok(authResponse);
-        } catch (NullPointerException e){ 
+        } catch (NullPointerException e){
+            log.error("User unauthorized");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
         } catch (Exception e) {
+            log.error("Error has occured, failed to authenticate users");
             System.out.println(e);
             return ResponseEntity.ok("Failed to authenticate users");
         }
