@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> RumahSehat</title>
+    <meta charset="UTF-8">
+    <title> Apoteker </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body class="bg-sky-100">
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+    <div class="card-body">
+        <div class="justify-content-center">
+            <h2>Detail Resep</h2>
+            <form th:action="@{/konfirmasi-resep/} + ${idAppointment}" th:object="${resep}" method="POST">
+                <div sec:authorize="hasAuthority('Apoteker')">
+                    <button class="btn btn-primary" type="submit">Konfirmasi Resep</button>
+                </div>
+            </form>
+
+            <br>
+            <p>Status Resep:
+                <span>
+                    <td th:if="${resep.isDone == false}">Not Done</td>
+                    <td th:unless="${resep.isDone == false}">Done</td>
+                </span>
+            </p>
+
+            <p th:text="'Resep: ' + ${resep.id}"></p>
+            <p th:text="'Dokter: ' + ${namaDokter}"></p>
+            <p th:text="'Pasien: ' + ${namaPasien}"></p>
+            <p th:text="'Apoteker: ' + ${namaApoteker}"></p>
+
+            <br>
+            <h4>Daftar Obat</h4>
+            <br>
+            <div th:if="${listJumlahObat.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Obat</th>
+                        <th>Jumlah</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="jumlahObat, iterationStatus : ${listJumlahObat}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${jumlahObat.obat.nama_obat}"></td>
+                        <td th:text="${jumlahObat.kuantitas}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <a class="btn btn-secondary" th:href="@{/resep/viewall}">Kembali</a>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+
+</html>
