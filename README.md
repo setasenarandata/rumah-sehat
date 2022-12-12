@@ -33,22 +33,34 @@
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
-| 1906303052 | Mirza Raevan Faisal | 2 3 |
+| 1906303052 | Mirza Raevan Faisal | 2  |
 | 2006597531 | Nathasya Shalsabilla Putri | 6 |
 | 1906399215 | Muhammad Farhan Thariq | 14 15 |
-| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 5 7 |
-| 2006482792 | Setasena Randata Ramadanie | 1 17 |
-| 2006482520 | Febrian Rayhan Aryadianto | 11 12 |
+| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 5 |
+| 2006482792 | Setasena Randata Ramadanie | 1 |
+| 2006482520 | Febrian Rayhan Aryadianto | 12 |
 ---
 
 **Kontrak Tahap 2 Tugas Akhir**
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
-| 1906303052 | Mirza Raevan Faisal | 4 |
+| 1906303052 | Mirza Raevan Faisal | 3 |
 | 2006597531 | Nathasya Shalsabilla Putri | 9 |
-| 1906399215 | Muhammad Farhan Thariq | 16 |
-| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 8 |
-| 2006482792 | Setasena Randata Ramadanie | 10 |
-| 2006482520 | Febrian Rayhan Aryadianto | 13 |
+| 1906399215 | Muhammad Farhan Thariq | 14 15 16 |
+| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 7 |
+| 2006482792 | Setasena Randata Ramadanie | 17 |
+| 2006482520 | Febrian Rayhan Aryadianto | 11 13 |
+---
+
+**Kontrak Tahap 3 Tugas Akhir**
+
+| NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
+| ----------| --- | ---------- | 
+| 1906303052 | Mirza Raevan Faisal | 4 |
+| 2006597531 | Nathasya Shalsabilla Putri | 6 (enhancement) |
+| 1906399215 | Muhammad Farhan Thariq | |
+| 2006483113 | Adristi Marsalma Nectarine Amaranthi | 10 |
+| 2006482792 | Setasena Randata Ramadanie | 8 14 15 16 |
+| 2006482520 | Febrian Rayhan Aryadianto | 13 (enhancement) |
 ---

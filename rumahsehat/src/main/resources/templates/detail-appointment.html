@@ -26,18 +26,19 @@
                     <p th:text="'Nama Dokter : ' + ${appointment.dokter.nama}"></p>
                     <p th:text="'Nama Pasien : ' + ${appointment.pasien.nama}"></p>
                     <br>
-                    <a class="btn btn-primary" th:if="${appointment.resep == null} and ${role == 'dokter'}" th:href="@{/resep/add/}">Create Resep</a>
+                    <a class="btn btn-primary" th:if="*{role=='Dokter'}" th:href="@{/resep/add/}">Create Resep</a>
                     <a class="btn btn-primary" th:if="${appointment.resep != null}" th:href="@{/resep/view/}">Lihat Resep</a>
                     <a class="btn btn-secondary" href="/appointment/viewall">Kembali</a>
                     <br>
 
                     <div th:if="${appointment.isDone} != true">
-                        <a th:if="${appointment.resep == null} and ${role == 'dokter'}"
+                        <br>
+                        <a th:if="${appointment.resep == null} and ${role == 'Dokter'}"
                            th:href="@{/appointment/finish(kode=${appointment.kode})}" class="btn btn-danger"
                            th:warning-msg="|Apakah anda yakin ingin menyelesaikan appointment tanpa resep?|" onclick="if (!confirm(this.getAttribute('warning-msg'))) return false">
                             Selesaikan Appointment
                         </a>
-                        <a th:if="${appointment.resep != null} and ${role == 'dokter'}"
+                        <a th:if="${appointment.resep != null} and ${role == 'Dokter'}"
                            th:href="@{/appointment/finish(kode=${appointment.kode})}" class="btn btn-danger">
                             Selesai
                         </a>
