@@ -65,16 +65,6 @@ public class AppointmentServiceImpl implements AppointmentService{
         } else if (user.getRole().equals("admin")) {
             return find;
         } else return null;
-//        } else if (dokter.getRole().equals("pasien")) {
-//            List<AppointmentModel> appointmentPasien = new ArrayList<AppointmentModel>();
-//            for (AppointmentModel appointment : find) {
-//                if (appointment.getDokter().getId().equals(dokter.getId())) {
-//                    appointmentPasien.add(appointment);
-//                }
-//            }
-//            find = appointmentPasien;
-//        }
-//        return find;
     }
 
     @Override
