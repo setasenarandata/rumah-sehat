@@ -73,7 +73,9 @@ public class PasienRestController {
                 HttpStatus.NOT_FOUND, "Pasien dengan username " + username + " tidak ditemukan"
             );
         }
-    }@PutMapping(value = "/pasien/{username}/bayarTagihan/{amount}")
+    }
+    
+    @PutMapping(value = "/pasien/{username}/bayarTagihan/{amount}")
     private PasienModel bayarTagihan(@PathVariable("username") String username, @PathVariable int amount){
         try{
             return pasienRestService.bayarTagihan(username, amount);

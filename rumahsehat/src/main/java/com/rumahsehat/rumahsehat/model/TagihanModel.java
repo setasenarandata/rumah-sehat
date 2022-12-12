@@ -32,7 +32,6 @@ public class TagihanModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tanggalTerbuat;
 
-    @NotNull
     @Column(name = "tanggal_bayar", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tanggalBayar;
@@ -45,8 +44,8 @@ public class TagihanModel implements Serializable {
     @Column(name = "jumlah_tagihan", nullable = false)
     private Integer jumlahTagihan;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "tagihan")
-    private AppointmentModel appointment;
+    @NotNull
+    @Column(name = "kode_appointment", nullable = false)
+    private String kode_appointment;
 
 }

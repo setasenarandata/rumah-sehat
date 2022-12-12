@@ -10,6 +10,7 @@ import com.rumahsehat.rumahsehat.service.AppointmentService;
 import com.rumahsehat.rumahsehat.service.DokterService;
 import com.rumahsehat.rumahsehat.service.JumlahService;
 import com.rumahsehat.rumahsehat.service.ObatService;
+import com.rumahsehat.rumahsehat.service.ResepService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,10 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +40,9 @@ public class DokterController {
 
     @Autowired
     private JumlahService jumlahService;
+
+    @Autowired
+    private ResepService resepService;
 
     @GetMapping("/user/add-dokter")
     public String addDokterFormPage(Model model){
@@ -92,15 +94,13 @@ public class DokterController {
     }
 
     @PostMapping(value = "/create-resep/{idAppointment}")
-    private String postCreateResep(@PathVariable("idAppointment") String idAppointment ,@ModelAttribute ResepModel resep, RedirectAttributes redirectAttributes, Model model) {
+    private String postCreateResep(@PathVariable("idAppointment") String idAppointment ,@ModelAttribute ResepModel resep, Model model) {
         try {
             resep.setCreatedAt(LocalDateTime.now());
 
             AppointmentModel appointment = appointmentService.getAppointmentById(idAppointment);
-            resep.setAppointment(appointment);
-
             appointment.setResep(resep);
-
+            resep.setKode_appointment(idAppointment);
             resep.setIsDone(false);
 
             System.out.println("MASUK POST MAPPING CREATE RESEP");
@@ -109,8 +109,7 @@ public class DokterController {
                 resep.setListJumlah(new ArrayList<>());
             } else {
                 List<JumlahModel> jumlah = resep.getListJumlah();
-                List<JumlahModel> newJumlah = new ArrayList<JumlahModel>();
-
+                System.out.println("jumlah size: " + jumlah.size());
                 for (int i = 0; i < jumlah.size(); i++) {
                     ObatModel obat = jumlah.get(i).getObat();
                     Integer quantity = jumlah.get(i).getKuantitas();
@@ -119,24 +118,14 @@ public class DokterController {
                     System.out.println(obat);
                     ObatModel obatTerpilih = obatService.findById(obat.getId_obat());
                     
-                    JumlahModel newModel = new JumlahModel();
-                    newModel.setKuantitas(quantity);
-                    newModel.setResep(resep);
-                    newModel.setObat(obatTerpilih);
-                    
-                    newJumlah.add(newModel);
+                    jumlah.get(i).setKuantitas(quantity);
+                    jumlah.get(i).setResep(resep);
+                    jumlah.get(i).setObat(obatTerpilih);
 
                 }
-                resep.setListJumlah(newJumlah);
             }
 
-            for (JumlahModel element : resep.getListJumlah()) {
-                System.out.println("Nama obat: " + element.getObat().getNama_obat());
-            }
-
-            dokterService.saveResep(resep);
-
-            redirectAttributes.addFlashAttribute("Sukses", "Berhasil menambahkan resep");
+            resepService.saveResep(resep);
 
             return "redirect:/viewall-resep";
         } catch (Exception e) {
@@ -186,12 +175,14 @@ public class DokterController {
     @GetMapping("/detail-resep/{idResep}")
     public String viewDetailResep(@PathVariable Long idResep, Model model) {
         
-        ResepModel resep = dokterService.getResepById(idResep);
+        ResepModel resep = resepService.getResepById(idResep);
+        String kode_appointment = resep.getKode_appointment();
+        AppointmentModel appointment = appointmentService.getAppointmentById(kode_appointment);
         
         ApotekerModel apoteker = resep.getConfirmer();
 
-        String namaDokter = resep.getAppointment().getDokter().getNama();
-        String namaPasien = resep.getAppointment().getPasien().getNama();
+        String namaDokter = appointment.getDokter().getNama();
+        String namaPasien = appointment.getPasien().getNama();
 
         List<JumlahModel> listJumlahObat = resep.getListJumlah();
 
@@ -212,7 +203,7 @@ public class DokterController {
 
     @GetMapping(value = "/viewall-resep")
     public String listResep(Model model){
-        List<ResepModel> listResep = dokterService.getListResep();
+        List<ResepModel> listResep = resepService.getListResep();
         model.addAttribute("listResep", listResep);
         return "viewall-resep";
     }
