@@ -12,4 +12,5 @@ public interface AppointmentService {
     List<AppointmentModel> getListAppointment(User used);
 
     AppointmentModel getAppointmentById(String kode);
+    String finishAppointment(String kode);
 }

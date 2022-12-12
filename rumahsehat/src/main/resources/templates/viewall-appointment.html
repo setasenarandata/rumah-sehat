@@ -14,27 +14,30 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2>List Appointment</h2>
+                <h2 class="font-weight-bold">List Appointment</h2>
                 <br>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th th:if="*{role=='Admin'}"style="text-align: center">Nama Dokter</th>
+                        <th th:if="*{role=='admin'}"style="text-align: center">Nama Dokter</th>
                         <th style="text-align: center">Nama Pasien</th>
                         <th style="text-align: center">Waktu Awal Appointment</th>
                         <th style="text-align: center">Status Appointment</th>
+                        <th style="text-align: center">Detail Appointment</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="appointment, iterationStatus : ${listAppointment}"
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
-                        <td th:if="*{role=='Admin'}" th:text="${appointment.dokter.nama}"></td>
-                        <td th:text="${appointment.pasien.nama}"></td>
-                        <td th:text="${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}"></td>
-                        <td th:text="${appointment.isDone}"></td>
+                        <td th:if="*{role=='admin'}" th:text="${appointment.dokter.nama}" style="text-align: center"></td>
+                        <td th:text="${appointment.pasien.nama}" style="text-align: center"></td>
+                        <td th:text="${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}" style="text-align: center"></td>
+<!--                        <td th:text="${appointment.isDone}" style="text-align: center"></td>-->
+                        <td th:if="${appointment.isDone} != true" style="text-align: center">Belum Selesai</td>
+                        <td th:unless="${appointment.isDone} != true" style="text-align: center">Sudah Selesai</td>
                         <td style="align-items: center">
-                            <div class="flex-wrap">
-                                <a class="btn btn-primary" href="/" >Detail</a>
+                            <div class="col text-center mx-auto">
+                                <a class="btn btn-info" th:href="@{/appointment/view(kode=${appointment.kode})}">Detail</a>
                             </div>
                         </td>
                     </tr>
@@ -46,3 +49,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>

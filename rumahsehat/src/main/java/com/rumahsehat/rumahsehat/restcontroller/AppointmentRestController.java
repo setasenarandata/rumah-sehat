@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +27,7 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class AppointmentRestController {
 
+    Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
     @Autowired
     private DokterService dokterService;
 
@@ -60,6 +63,7 @@ public class AppointmentRestController {
     @PostMapping(value = "/appointment")
     public boolean addAppointment(@RequestBody Map<String, String> appointmentModel) throws Exception {
         try {
+            log.info("Add an appointment");
             System.out.println("INSIDE APPOINTMENT POST MAPPING");
             System.out.println("Username: " + appointmentModel.get("username"));
             System.out.println("Doctor: " + appointmentModel.get("dokter"));
@@ -93,6 +97,7 @@ public class AppointmentRestController {
                 return false;
             }
         } catch (Exception e) {
+            log.error("Appointment failed to create");
             System.out.println(e);
             return false;
         }

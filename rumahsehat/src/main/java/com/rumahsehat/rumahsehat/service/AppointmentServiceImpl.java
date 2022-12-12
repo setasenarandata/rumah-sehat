@@ -1,15 +1,20 @@
 package com.rumahsehat.rumahsehat.service;
 
 import com.rumahsehat.rumahsehat.model.AppointmentModel;
+import com.rumahsehat.rumahsehat.model.TagihanModel;
 import com.rumahsehat.rumahsehat.model.UserModel;
 import com.rumahsehat.rumahsehat.repository.AdminDb;
 import com.rumahsehat.rumahsehat.repository.ApotekerDb;
 import com.rumahsehat.rumahsehat.repository.AppointmentDb;
 import com.rumahsehat.rumahsehat.repository.DokterDb;
+import com.rumahsehat.rumahsehat.repository.TagihanDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
@@ -26,6 +31,8 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Autowired
     DokterDb dokterDb;
+    @Autowired
+    TagihanDb tagihanDb;
 
     @Autowired
     AdminDb adminDb;
@@ -77,6 +84,34 @@ public class AppointmentServiceImpl implements AppointmentService{
         } else if (role.equals("dokter")) {
             return adminDb.findByUsername(name);
         } return null;
+    }
+
+    public void appointTagihan(String kode) {
+        AppointmentModel appointmentModel = getAppointmentById(kode);
+        TagihanModel tagihanModel = new TagihanModel();
+
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm");
+        String stringDate = date.format(dateFormat);
+
+        LocalDateTime tanggalAppoint = LocalDateTime.parse(stringDate, dateFormat);
+        tagihanModel.setTanggalTerbuat(tanggalAppoint);
+
+        tagihanModel.setJumlahTagihan(appointmentModel.getDokter().getTarif());
+        tagihanModel.setAppointment(appointmentModel);
+        tagihanDb.save(tagihanModel);
+    }
+
+    @Override
+    public String finishAppointment(String kode) {
+        AppointmentModel appointment = getAppointmentById(kode);
+        if (appointment.getResep() != null && (appointment.getResep().getIsDone() != true)) {
+            return "Appointment Gagal Diubah";
+        } else {
+            appointment.setIsDone(true);
+            appointTagihan(kode);
+            return "Appointment Telah Diselesaikan";
+        }
     }
 
 }
