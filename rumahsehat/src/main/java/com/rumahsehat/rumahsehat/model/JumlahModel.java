@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,20 +28,18 @@ public class JumlahModel implements  Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Size(max = 50)
     @ManyToOne(fetch = FetchType.EAGER, optional=false)
     @JoinColumn(name = "id_obat", referencedColumnName = "id_obat")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ObatModel obat;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional=false)
     @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ResepModel resep;
 
     @NotNull
-    @Size(max = 200)
     @Column(name = "kuantitas", nullable = false)
     private Integer kuantitas;
 }
