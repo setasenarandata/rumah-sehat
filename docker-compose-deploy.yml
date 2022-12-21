@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: apap-registry.cs.ui.ac.id/setasena.randata/apap-tk-63
+    image: apap-registry.cs.ui.ac.id/mirza.raevan/apap-063
     restart: always
     ports:
       - "10063:8080"
