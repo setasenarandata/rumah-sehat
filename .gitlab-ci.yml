@@ -69,8 +69,8 @@ build-image:
   stage: build-image
   script:
     - echo "Building Docker Image..."
-    - docker build -t $REGISTRY_SERVER/mirza.raevan/apap-063:$CI_COMMIT_SHORT_SHA .
-    - docker build -t $REGISTRY_SERVER/mirza.raevan/apap-063:latest .
+    - docker build -t $REGISTRY_SERVER/setasena.randata/apap-063:$CI_COMMIT_SHORT_SHA .
+    - docker build -t $REGISTRY_SERVER/setasena.randata/apap-063:latest .
 
 publish-image:
   stage: publish-image
@@ -78,8 +78,8 @@ publish-image:
     - echo "Publishing Docker Image..."
     - echo $REGISTRY_SERVER
     - echo $REGISTRY_PASSWORD | docker login --username $REGISTRY_USERNAME --password-stdin $REGISTRY_SERVER
-    - docker push $REGISTRY_SERVER/mirza.raevan/apap-063:$CI_COMMIT_SHORT_SHA
-    - docker push $REGISTRY_SERVER/mirza.raevan/apap-063:latest
+    - docker push $REGISTRY_SERVER/setasena.randata/apap-063:$CI_COMMIT_SHORT_SHA
+    - docker push $REGISTRY_SERVER/setasena.randata/apap-063:latest
 
 deploy:
   stage: deploy
