@@ -4,7 +4,7 @@ services:
     image: apap-registry.cs.ui.ac.id/setasena.randata/apap-063
     restart: always
     ports:
-      - "10063:8080"
+      - "10104:8080"
     volumes:
       - ./file-storage:/file-storage
       - ./log:/log
