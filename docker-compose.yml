@@ -5,7 +5,7 @@ services:
       context: .
     restart: always
     ports:
-      - "10104:8080"
+      - "10063:8080"
     volumes:
       - ./file-storage:/file-storage
       - ./log:/log
