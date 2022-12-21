@@ -426,7 +426,7 @@ class _DetailTagihanPageState extends State<DetailTagihanPage> {
 Future<void> updateSaldo(String username, int amount) async {
   http
       .put(
-        Uri.parse('http://localhost:8080/api/v1/pasien/' +
+        Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/pasien/' +
             username +
             '/bayarTagihan/' +
             amount.toString()),
@@ -442,7 +442,7 @@ Future<void> updateTagihan(String kode, String tanggalTerbuat,
     String tanggalBayar, bool isPaid, int jumlahTagihan) async {
   http
       .put(
-        Uri.parse('http://localhost:8080/api/v1/tagihan/' + kode),
+        Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/tagihan/' + kode),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

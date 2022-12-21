@@ -251,7 +251,7 @@ Future<void> create_appointment(
   print(waktu);
   http
       .post(
-        Uri.parse('http://localhost:8080/api/v1/appointment'),
+        Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/appointment'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -272,8 +272,8 @@ List<Dokter> parseDoctor(String responseBody) {
 }
 
 Future<List<Dokter>> fetchListDoctor() async {
-  final response =
-      await http.get(Uri.parse('http://localhost:8080/api/v1/list-doctor/'));
+  final response = await http
+      .get(Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/list-doctor/'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

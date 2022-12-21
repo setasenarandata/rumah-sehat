@@ -135,8 +135,8 @@ class ViewAllTagihanState extends State<ViewAllTagihan> {
 }
 
 Future<List<TagihanModel>> fetchMyBills(String username) async {
-  final response = await http
-      .get(Uri.parse('http://localhost:8080/api/v1/list-tagihan/' + username));
+  final response = await http.get(Uri.parse(
+      'https://apap-104.cs.ui.ac.id/api/v1/list-tagihan/' + username));
 
   if (response.statusCode == 200) {
     return parseTagihan(response.body);

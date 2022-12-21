@@ -24,8 +24,8 @@ class Tagihan {
 }
 
 Future<Tagihan> fetchDetailTagihan(String kode) async {
-  final response =
-      await http.get(Uri.parse('http://localhost:8080/api/v1/tagihan/' + kode));
+  final response = await http
+      .get(Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/tagihan/' + kode));
 
   if (response.statusCode == 200) {
     return Tagihan.fromJson(jsonDecode(response.body));

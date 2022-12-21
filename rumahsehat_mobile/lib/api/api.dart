@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class Api {
-  static final String url = "http://localhost:8080/api/";
+  static final String url = "https://apap-104.cs.ui.ac.id/api/";
   static final dio = Dio(BaseOptions(baseUrl: url));
 
   static Future<Map> login(String username, String password) async {
