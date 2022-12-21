@@ -246,7 +246,7 @@ Future<void> create_pasien(String username, String nama, String email,
     String password, int umur) async {
   http
       .post(
-        Uri.parse('http://localhost:8080/api/v1/pasien/add'),
+        Uri.parse('https://apap-104.cs.ui.ac.id/api/v1/pasien/add'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

@@ -196,7 +196,7 @@ class _TopupPageState extends State<TopupPage> {
 
 Future<bool> patchSaldo(String id, int amount) async {
   final response = await http.patch(Uri.parse(
-      'http://localhost:8080/api/v1/pasien/' +
+      'https://apap-104.cs.ui.ac.id/api/v1/pasien/' +
           id +
           '/topup/' +
           amount.toString()));
