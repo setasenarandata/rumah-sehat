@@ -1,4 +1,4 @@
-# Tugas Akhir
+# Tugas Akhir APAP
 ## Authors
 * **Mirza Raevan Faisal** - *1906303052* - *B*
 * **Nathasya Shalsabilla Putri** - *2006597531* - *B*
